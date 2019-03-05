@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B02A2B5221BEAC900B39CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2B4221BEAC900B39CEB /* AppDelegate.swift */; };
+		0B02A2B7221BEAC900B39CEB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2B6221BEAC900B39CEB /* ViewController.swift */; };
+		0B02A2BA221BEAC900B39CEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B02A2B8221BEAC900B39CEB /* Main.storyboard */; };
+		0B02A2BC221BEACB00B39CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B02A2BB221BEACB00B39CEB /* Assets.xcassets */; };
+		0B02A2BF221BEACB00B39CEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B02A2BD221BEACB00B39CEB /* LaunchScreen.storyboard */; };
+		0B02A2C7221BEB0900B39CEB /* Entrants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2C6221BEB0900B39CEB /* Entrants.swift */; };
+		0B02A2CD221BEB4E00B39CEB /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2CC221BEB4E00B39CEB /* SoundManager.swift */; };
+		0B02A2CF221BEB7700B39CEB /* ParkEntrance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2CE221BEB7700B39CEB /* ParkEntrance.swift */; };
+		0B02A2D1221BEB8E00B39CEB /* Passes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D0221BEB8E00B39CEB /* Passes.swift */; };
+		0B02A2D3221BEB9C00B39CEB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D2221BEB9C00B39CEB /* Errors.swift */; };
+		0B02A2D5221BEBAF00B39CEB /* Swipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D4221BEBAF00B39CEB /* Swipes.swift */; };
+		0B02A2D9221BEBCA00B39CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D8221BEBCA00B39CEB /* Protocols.swift */; };
+		0B02A2DB221BEBF000B39CEB /* TimerForGates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2DA221BEBF000B39CEB /* TimerForGates.swift */; };
+		0B02A2DE221BECFA00B39CEB /* AccessDenied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B02A2DD221BECF900B39CEB /* AccessDenied.wav */; };
+		0B02A2E0221BED0300B39CEB /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B02A2DF221BED0300B39CEB /* AccessGranted.wav */; };
+		0B02A2E42229911A00B39CEB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2E32229911A00B39CEB /* SecondViewController.swift */; };
+		0B02A2E6222C019000B39CEB /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2E5222C019000B39CEB /* ButtonDesign.swift */; };
+		0BBACD56222D4C8500F07685 /* InputCheckers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBACD55222D4C8500F07685 /* InputCheckers.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0B02A2B1221BEAC900B39CEB /* AwesomeLand Pass Generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AwesomeLand Pass Generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B02A2B4221BEAC900B39CEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0B02A2B6221BEAC900B39CEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0B02A2B9221BEAC900B39CEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0B02A2BB221BEACB00B39CEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0B02A2BE221BEACB00B39CEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0B02A2C0221BEACB00B39CEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B02A2C6221BEB0900B39CEB /* Entrants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entrants.swift; sourceTree = "<group>"; };
+		0B02A2CC221BEB4E00B39CEB /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		0B02A2CE221BEB7700B39CEB /* ParkEntrance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkEntrance.swift; sourceTree = "<group>"; };
+		0B02A2D0221BEB8E00B39CEB /* Passes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passes.swift; sourceTree = "<group>"; };
+		0B02A2D2221BEB9C00B39CEB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		0B02A2D4221BEBAF00B39CEB /* Swipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipes.swift; sourceTree = "<group>"; };
+		0B02A2D8221BEBCA00B39CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		0B02A2DA221BEBF000B39CEB /* TimerForGates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForGates.swift; sourceTree = "<group>"; };
+		0B02A2DD221BECF900B39CEB /* AccessDenied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessDenied.wav; sourceTree = "<group>"; };
+		0B02A2DF221BED0300B39CEB /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessGranted.wav; sourceTree = "<group>"; };
+		0B02A2E32229911A00B39CEB /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		0B02A2E5222C019000B39CEB /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
+		0BBACD55222D4C8500F07685 /* InputCheckers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCheckers.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0B02A2AE221BEAC900B39CEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B02A2A8221BEAC900B39CEB = {
+			isa = PBXGroup;
+			children = (
+				0B02A2B3221BEAC900B39CEB /* AwesomeLand Pass Generator */,
+				0B02A2B2221BEAC900B39CEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0B02A2B2221BEAC900B39CEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2B1221BEAC900B39CEB /* AwesomeLand Pass Generator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0B02A2B3221BEAC900B39CEB /* AwesomeLand Pass Generator */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2DC221BEC1600B39CEB /* Controller */,
+				0B02A2C8221BEB1B00B39CEB /* Models */,
+				0B02A2C9221BEB2300B39CEB /* View */,
+				0B02A2CB221BEB3600B39CEB /* Sound */,
+				0B02A2CA221BEB2B00B39CEB /* Timer */,
+				0B02A2C0221BEACB00B39CEB /* Info.plist */,
+				0B02A2BB221BEACB00B39CEB /* Assets.xcassets */,
+			);
+			path = "AwesomeLand Pass Generator";
+			sourceTree = "<group>";
+		};
+		0B02A2C8221BEB1B00B39CEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2C6221BEB0900B39CEB /* Entrants.swift */,
+				0B02A2CE221BEB7700B39CEB /* ParkEntrance.swift */,
+				0B02A2D0221BEB8E00B39CEB /* Passes.swift */,
+				0B02A2D2221BEB9C00B39CEB /* Errors.swift */,
+				0B02A2D4221BEBAF00B39CEB /* Swipes.swift */,
+				0B02A2D8221BEBCA00B39CEB /* Protocols.swift */,
+				0BBACD55222D4C8500F07685 /* InputCheckers.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0B02A2C9221BEB2300B39CEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2B8221BEAC900B39CEB /* Main.storyboard */,
+				0B02A2BD221BEACB00B39CEB /* LaunchScreen.storyboard */,
+				0B02A2E5222C019000B39CEB /* ButtonDesign.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B02A2CA221BEB2B00B39CEB /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2DA221BEBF000B39CEB /* TimerForGates.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		0B02A2CB221BEB3600B39CEB /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2CC221BEB4E00B39CEB /* SoundManager.swift */,
+				0B02A2DD221BECF900B39CEB /* AccessDenied.wav */,
+				0B02A2DF221BED0300B39CEB /* AccessGranted.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		0B02A2DC221BEC1600B39CEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0B02A2B6221BEAC900B39CEB /* ViewController.swift */,
+				0B02A2E32229911A00B39CEB /* SecondViewController.swift */,
+				0B02A2B4221BEAC900B39CEB /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0B02A2B0221BEAC900B39CEB /* AwesomeLand Pass Generator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B02A2C3221BEACB00B39CEB /* Build configuration list for PBXNativeTarget "AwesomeLand Pass Generator" */;
+			buildPhases = (
+				0B02A2AD221BEAC900B39CEB /* Sources */,
+				0B02A2AE221BEAC900B39CEB /* Frameworks */,
+				0B02A2AF221BEAC900B39CEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AwesomeLand Pass Generator";
+			productName = "AwesomeLand Pass Generator";
+			productReference = 0B02A2B1221BEAC900B39CEB /* AwesomeLand Pass Generator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0B02A2A9221BEAC900B39CEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Studio Willebrands";
+				TargetAttributes = {
+					0B02A2B0221BEAC900B39CEB = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 0B02A2AC221BEAC900B39CEB /* Build configuration list for PBXProject "AwesomeLand Pass Generator" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0B02A2A8221BEAC900B39CEB;
+			productRefGroup = 0B02A2B2221BEAC900B39CEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0B02A2B0221BEAC900B39CEB /* AwesomeLand Pass Generator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0B02A2AF221BEAC900B39CEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B02A2BF221BEACB00B39CEB /* LaunchScreen.storyboard in Resources */,
+				0B02A2E0221BED0300B39CEB /* AccessGranted.wav in Resources */,
+				0B02A2BC221BEACB00B39CEB /* Assets.xcassets in Resources */,
+				0B02A2BA221BEAC900B39CEB /* Main.storyboard in Resources */,
+				0B02A2DE221BECFA00B39CEB /* AccessDenied.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B02A2AD221BEAC900B39CEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B02A2E42229911A00B39CEB /* SecondViewController.swift in Sources */,
+				0B02A2DB221BEBF000B39CEB /* TimerForGates.swift in Sources */,
+				0B02A2D1221BEB8E00B39CEB /* Passes.swift in Sources */,
+				0B02A2E6222C019000B39CEB /* ButtonDesign.swift in Sources */,
+				0B02A2B7221BEAC900B39CEB /* ViewController.swift in Sources */,
+				0B02A2D5221BEBAF00B39CEB /* Swipes.swift in Sources */,
+				0B02A2CF221BEB7700B39CEB /* ParkEntrance.swift in Sources */,
+				0B02A2D9221BEBCA00B39CEB /* Protocols.swift in Sources */,
+				0B02A2CD221BEB4E00B39CEB /* SoundManager.swift in Sources */,
+				0BBACD56222D4C8500F07685 /* InputCheckers.swift in Sources */,
+				0B02A2C7221BEB0900B39CEB /* Entrants.swift in Sources */,
+				0B02A2B5221BEAC900B39CEB /* AppDelegate.swift in Sources */,
+				0B02A2D3221BEB9C00B39CEB /* Errors.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0B02A2B8221BEAC900B39CEB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B02A2B9221BEAC900B39CEB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0B02A2BD221BEACB00B39CEB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B02A2BE221BEACB00B39CEB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0B02A2C1221BEACB00B39CEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0B02A2C2221BEACB00B39CEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0B02A2C4221BEACB00B39CEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 223MS2NG2U;
+				INFOPLIST_FILE = "AwesomeLand Pass Generator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wouterwillebrands.AwesomeLand-Pass-Generator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0B02A2C5221BEACB00B39CEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 223MS2NG2U;
+				INFOPLIST_FILE = "AwesomeLand Pass Generator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wouterwillebrands.AwesomeLand-Pass-Generator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0B02A2AC221BEAC900B39CEB /* Build configuration list for PBXProject "AwesomeLand Pass Generator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B02A2C1221BEACB00B39CEB /* Debug */,
+				0B02A2C2221BEACB00B39CEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0B02A2C3221BEACB00B39CEB /* Build configuration list for PBXNativeTarget "AwesomeLand Pass Generator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B02A2C4221BEACB00B39CEB /* Debug */,
+				0B02A2C5221BEACB00B39CEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0B02A2A9221BEAC900B39CEB /* Project object */;
+}
