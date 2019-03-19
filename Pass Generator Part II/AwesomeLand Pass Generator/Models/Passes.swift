@@ -63,11 +63,7 @@ class Pass {
     }
 }
 
-// MARK: - Pass enums
-enum TypeOfPass: String {
-    case classic, vip, freeChild, foodService, rideService, maintenance, manager, season, senior, contract, vendor
-    
-}
+
 
 
 // These are the subclasses for the Pass-superclass

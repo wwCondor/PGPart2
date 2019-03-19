@@ -44,66 +44,28 @@ class BirthdayCheck {
 
 struct AreaAccesPoint {
     
-    // These are the different areas that have area access checkpoints
-    enum Area {
-        case amusementArea
-        case kitchenArea
-        case rideControlArea
-        case mainenanceArea
-        case officeArea
-    }
-    
-    static func additionalAreaAccess(area: Area, company: Company, project: ContractEmployee) -> Bool {
-        let project = project.projectNumber
+  static func additionalAreaAccess(area: Area, company: Company, project: Project) -> Bool {
         
         switch area {
-        case .amusementArea: if company == .orkin || company == .nwElectrical || project == "1001" || project == "1002" || project == "1003" {
+        case .amusementArea: if company == .orkin || company == .nwElectrical || project == .p1001  || project == .p1002 || project == .p1003 {
             return true
             }
-        case .rideControlArea: if company == .orkin || company == .nwElectrical || project == "1001" || project == "1002" || project == "1003" {
+        case .rideControlArea: if company == .orkin || company == .nwElectrical || project == .p1001 || project == .p1002 || project == .p1003 {
             return true
             }
-        case .kitchenArea: if company == .acme || company == .orkin || company == .nwElectrical || project == "1003" || project == "2002" {
+        case .kitchenArea: if company == .acme || company == .orkin || company == .nwElectrical || project == .p1003 || project == .p2002 {
             return true
             }
-        case .mainenanceArea: if company == .fedex || company == .nwElectrical || project == "1002" || project == "1003" || project == "2002" {
+        case .mainenanceArea: if company == .fedex || company == .nwElectrical || project == .p1002 || project == .p1003 || project == .p2002 {
             return true
             }
-        case .officeArea: if company == .fedex || company == .nwElectrical || project == "1003" || project == "2001" {
+        case .officeArea: if company == .fedex || company == .nwElectrical || project == .p1003 || project == .p2001 {
             return true
             }
-        }
-        return false
-    }
-   /*
-    static func rideControlAccess(company: Company) -> Bool {
-        if company == .orkin || company == .nwElectrical {
-            return true
         }
         return false
     }
     
-    static func kitchenAccess(company: Company) -> Bool {
-        if company == .acme || company == .orkin || company == .nwElectrical {
-            return true
-        }
-        return false
-    }
-    
-    static func maintenanceAccess(company: Company) -> Bool {
-        if company == .fedex || company == .nwElectrical {
-            return true
-        }
-        return false
-    }
-    
-    static func officeAccess(company: Company) -> Bool {
-        if company == .fedex || company == .nwElectrical {
-            return true
-        }
-        return false
-    }
-    */
  
     static func check(pass: Pass, forCheckpoint: Area) -> Bool {
         
@@ -156,14 +118,6 @@ struct AreaAccesPoint {
 
 
 struct PrivilegeSwipe {
-    
-    
-    // These are the various privileges an entrant can have
-    enum Privilege {
-        case skipLines
-        case discountForFood
-        case discountForMerchandise
-    }
     
     static func swipe(pass: Pass, toCheck: Privilege) -> Bool {
         

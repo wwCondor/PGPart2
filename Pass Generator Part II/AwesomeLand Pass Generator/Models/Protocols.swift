@@ -13,7 +13,7 @@ import Foundation
 
 // This is the entrance registration protocols
 // for Guests:
-protocol GuestEntrance {
+protocol GuestProtocol {
     func isEligibleForFreeEntry() throws -> Bool
     func childRegistrationComplete() -> Bool
     func assignPassToGuest(entrant: Guest) -> Pass?
@@ -21,7 +21,7 @@ protocol GuestEntrance {
 }
 
 // for Employees:
-protocol EmployeeEntrance {
+protocol EmployeeProtocol {
     func employeeRegistrationCheck(entrant: Employee) throws
     func employeeRegistrationComplete(entrant: Employee) -> Bool
     func assignPassToEmployee(entrant: Employee) -> Pass?
@@ -29,7 +29,7 @@ protocol EmployeeEntrance {
 }
 
 // for contract Employees
-protocol ContractEmployeeEntrance {
+protocol ContractEmployeeProtocol {
     func employeeRegistrationCheck(entrant: Employee) throws
     func contractEmployeeRegistrationCheck(entrant: ContractEmployee) throws
     func employeeRegistrationComplete(entrant: Employee) -> Bool
@@ -38,7 +38,7 @@ protocol ContractEmployeeEntrance {
 }
 
 // for Vendors:
-protocol VendorEntrance {
+protocol VendorProtocol {
     func vendorRegistrationCheck(entrant: Vendor) throws
     func vendorRegistrationComplete(entrant: Vendor) -> Bool
     func assignPassToVendor(entrant: Vendor) -> Pass?
