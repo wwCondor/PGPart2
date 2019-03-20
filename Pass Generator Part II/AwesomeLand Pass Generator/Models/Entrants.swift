@@ -14,25 +14,115 @@
 // Vendors
 
 // Entrant is the superclass
-/*
-class Entrant {
-     var birthday: String?
-    
-     init(birthday: String?) throws {
-        guard let birthday = birthday else {
-            throw EntrantError.missingBirthday(description: "Invalid date of birth")
-        }
-            self.birthday = birthday
-        }
-}
- */
-
 class Entrant {
     var birthday: String?
     
     init(birthday: String?) {
         self.birthday = birthday
+    }
+    
+    func assignPass(entrant: Entrant) -> Pass? {
+        
+        switch entrant {
+            
+        case is Guest:
+            guard let guest = entrant as? Guest else { return nil }
+            
+            switch guest.type {
+            case .classic:
+                let pass = ClassicGuestPass(entrant: guest)
+                return pass
+            case .freeChild:
+                let childSuccess = childRegistrationComplete()
+                if childSuccess == true {
+                    let pass = FreeChildPass(entrant: guest)
+                    return pass
+                }
+            case .vip:
+                let pass = VIPPass(entrant: guest)
+                return pass
+                
+            default: break
+                
+            }
+            
+        case is SeasonGuest:
+            guard let seasonGuest = entrant as? SeasonGuest else { return nil }
+            
+            let seasonSuccess = seasonRegistrationComplete(entrant: seasonGuest)
+            if seasonSuccess {
+                let pass = SeasonPass(entrant: seasonGuest)
+                return pass
+            } else {
+                return nil
+            }
+            
+        case is SeniorGuest:
+            
+            guard let seniorGuest = entrant as? SeniorGuest else { return nil }
+            
+            let seniorSuccess = seniorRegistrationComplete(entrant: seniorGuest)
+            if seniorSuccess {
+                let pass = SeniorGuestPass(entrant: seniorGuest)
+                return pass
+            } else {
+                return nil
+            }
+            
+        case is Employee:
+            guard let employee = entrant as? Employee else { return nil }
+            
+            let success = employeeRegistrationComplete(entrant: employee)
+            
+            if success {
+                switch employee.type {
+
+                case .foodServices:
+                    let pass = FoodServicesPass(entrant: employee)
+                    return pass
+                case .maintenance:
+                    let pass = MaintenancePass(entrant: employee)
+                    return pass
+                case .manager:
+                    let pass = ManagerPass(entrant: employee)
+                    return pass
+                case .rideServices:
+                    let pass = RideServicesPass(entrant: employee)
+                    return pass
+                default: break
+                }
+            } else {
+                return nil
+            }
+        case is ContractEmployee:
+            guard let contractee = entrant as? ContractEmployee else { return nil }
+            
+            let contractSucces = contractEmployeeRegistrationComplete(entrant: contractee)
+            
+            if contractSucces {
+                let pass = ContractEmployeePass(entrant: contractee)
+                return pass
+            } else {
+                return nil
+            }
+            
+        case is Vendor:
+            guard let vendor = entrant as? Vendor else { return nil }
+            
+            let success = vendorRegistrationComplete(entrant: vendor)
+            
+            if success {
+                let pass = VendorPass(entrant: vendor)
+                return pass
+            } else {
+                return nil
+            }
+            
+        default:
+            return nil
         }
+        return nil
+    }
 }
 
 
@@ -93,7 +183,7 @@ class Employee: Entrant, EmployeeProtocol { // These need to conform Employee pr
     var zipCode: String
     
     init(type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, birthday: String?) {
-       
+        
         self.type = type
         self.firstName = firstName
         self.lastName = lastName
@@ -125,7 +215,7 @@ class ContractEmployee: Employee {
 
 
 // Vendor is a subclass for Entrant and conforms VendorProtocol
-class Vendor: Entrant { // VendorProtocol {
+class Vendor: Entrant { //, VendorProtocol {
     var company: Company
     var firstName: String
     var lastName: String

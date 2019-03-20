@@ -93,7 +93,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var streetCityStateZipStack: UIStackView!
     
     
-    @IBAction func createPassButton(_ sender: Any) {
+    @IBAction func createPassButtonTapped(_ sender: Any) {
         
         guard let firstName = firstNameTF.text else { return }
         guard let lastName = lastNameTF.text else { return }
@@ -127,24 +127,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let type = GuestType.senior
                 entrant = SeniorGuest(firstName: firstName, lastName: lastName, type: type, birthday: birthday)
             }
-            
-            guard let newEntrant = entrant else { return }
-            
-            // if let classGuestPass = classGuestPass
-            
-            
-            do {
-                // some check
-                pass = try Guest.assignPassToGuest(entrant: newEntrant)
-                // assignPassToGuest(entrant: newEntrant)
-                if pass != nil {
-                    performSegue(withIdentifier: "PassSegue", sender: self)
-                }
-            } catch
-            
-            
-
-            
+    
         } else if employeeButton.isSelected {
             if manager.isSelected {
                 let type = EmployeeType.manager
@@ -158,12 +141,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else if maintenance.isSelected {
                 let type = EmployeeType.maintenance
                 entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            }
-            
-            guard let newEntrant = entrant else { return }
-            
-            do {
-                // some check
             }
             
         } else if contractButton.isSelected {
@@ -189,12 +166,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             }
             
-            guard let newEntrant = entrant else { return }
-            
-            do {
-                // some check
-            }
-            
         } else if vendorButton.isSelected {
             if acme.isSelected {
                 let type = Company.acme
@@ -210,18 +181,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
             }
             
-            guard let newEntrant = entrant else { return }
-            
-            do {
-                // some check
-            }
         }
         
-        if pass != nil {
+        if let entrant = entrant as? Guest {
+            self.pass = entrant.assignPassToGuest(entrant: entrant)
             performSegue(withIdentifier: "PassSegue", sender: self)
+        } else if let entrant = entrant as? Employee {
+            self.pass = entrant.assignPassToEmployee(entrant: entrant)
+            // performSegue(withIdentifier: "PassSegue", sender: self)
+        } else {
+            return
         }
-        
-       
         
         // performSegue(withIdentifier: "PassSegue", sender: self)
     }

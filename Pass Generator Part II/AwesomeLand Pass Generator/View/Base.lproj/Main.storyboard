@@ -42,7 +42,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="createPassButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rwG-LP-ymm"/>
+                                            <action selector="createPassButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G9i-vL-ywl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGl-gH-ef4">

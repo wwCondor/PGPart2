@@ -38,7 +38,7 @@ protocol ContractEmployeeProtocol {
 }
 
 // for Vendors:
-protocol VendorProtocol {
+protocol VendorEntranceProtocol {
     func vendorRegistrationCheck(entrant: Vendor) throws
     func vendorRegistrationComplete(entrant: Vendor) -> Bool
     func assignPassToVendor(entrant: Vendor) -> Pass?
