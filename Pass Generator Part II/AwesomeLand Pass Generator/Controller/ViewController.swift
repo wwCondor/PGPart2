@@ -39,7 +39,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // Optional pass variable
     var pass: Pass?
-    
+    var entrant: Entrant?
     
     // MARK: - Menu Selection Buttons
     // This is the main menu for Entrants
@@ -107,7 +107,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         guard let ssn = ssnTF.text else { return }
         guard let dateOfVisit = dateOfVisitTF.text else { return }
         
-        var entrant: Entrant?
+        // var entrant: Entrant?
         // var pass: Pass?
         
         if guestButton.isSelected {
@@ -183,15 +183,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
         }
         
-        if let entrant = entrant as? Guest {
-            self.pass = entrant.assignPassToGuest(entrant: entrant)
+        // let classGuestPass = guestClassic.assignPassToGuest(entrant: guestClassic)
+        
+        if let entrant = entrant {
+            pass = entrant.assignPass(entrant: entrant)
+            
+            if pass != nil {
             performSegue(withIdentifier: "PassSegue", sender: self)
-        } else if let entrant = entrant as? Employee {
-            self.pass = entrant.assignPassToEmployee(entrant: entrant)
-            // performSegue(withIdentifier: "PassSegue", sender: self)
-        } else {
-            return
+            }
         }
+        
+        /*
+         let guestClassic = Guest(type: .classic, birthday: "01-03-1984")
+         let classGuestPass = guestClassic.assignPassToGuest(entrant: guestClassic)
+         if let classGuestPass = classGuestPass {
+         AreaAccesPoint.check(pass: classGuestPass, forCheckpoint: .officeArea) // should have access
+         AreaAccesPoint.check(pass: classGuestPass, forCheckpoint: .amusementArea) // should not have accedd
+         PrivilegeSwipe.swipe(pass: classGuestPass, toCheck: .discountForMerchandise)
+         PrivilegeSwipe.swipe(pass: classGuestPass, toCheck: .discountForFood)
+         PrivilegeSwipe.swipe(pass: classGuestPass, toCheck: .skipLines)
+         }
+         */
         
         // performSegue(withIdentifier: "PassSegue", sender: self)
     }
@@ -365,20 +377,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
          hideAllLabelsAndTextFields()
         
-//        let entrant: Entrant?
-//
-//        guard let firstName = firstNameTF.text else { return }
-//        guard let lastName = lastNameTF.text else { return }
-//        guard let birthday = dateOfBirthTF.text else { return }
-//
-//        guard let street = streetAddressTF.text else { return }
-//        guard let city = cityTF.text else { return }
-//        guard let state = stateTF.text else { return }
-//        guard let zipCode = zipCodeTF.text else { return }
-//
-//        guard let ssn = ssnTF.text else { return }
-//        guard let dateOfVisit = dateOfVisitTF.text else { return }
-        
         switch sender {
         case classic:
 //            let type = GuestType.classic
@@ -411,17 +409,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             //        showGuestMenu()
             
         case senior:
-//            let type = GuestType.senior
-//            let entrant = SeniorGuest(firstName: firstName, lastName: lastName, type: type, birthday: birthday)
             print("Senior")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showDateOfBirthFields()
-            //        showGuestMenu()
             
         case manager:
-//            let type = EmployeeType.manager
-//            let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             print("Manager")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
@@ -430,8 +423,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showSocialSecurityNumber()
             
         case foodServices:
-//            let type = EmployeeType.foodServices
-//            let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             print("Food Service")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
@@ -439,8 +430,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showSocialSecurityNumber()
             
         case rideServices:
-//            let type = EmployeeType.rideServices
-//            let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             print("Ride Service")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
@@ -448,8 +437,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showSocialSecurityNumber()
             
         case maintenance:
-//            let type = EmployeeType.maintenance
-//            let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             print("Maintenance")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
@@ -457,70 +444,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showSocialSecurityNumber()
             
         case acme:
-//            let type = Company.acme
-//            let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
             print("Acme")
             showDateOfBirthFields()
             showVendorFields()
             
         case orkin:
-//            let type = Company.orkin
-//            let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
             print("Orkin")
             showDateOfBirthFields()
             showVendorFields()
             
         case fedex:
-//            let type = Company.fedex
-//            let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
+
             print("Fedex")
             showDateOfBirthFields()
             showVendorFields()
             
         case nwElectrical:
-//            let type = Company.nwElectrical
-//            let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
+
             print("NW Electrical")
             showDateOfBirthFields()
             showVendorFields()
             
         case project1001:
-//            let type = EmployeeType.contract
-//            let project = Project.p1001
-//            let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
+
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
             
         case project1002:
-//            let type = EmployeeType.contract
-//            let project = Project.p1002
-//            let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
+
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
             
         case project1003:
-//            let type = EmployeeType.contract
-//            let project = Project.p1003
-//            let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
             
         case project2001:
-//            let type = EmployeeType.contract
-//            let project = Project.p2001
-//            let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
+
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
             
         case project2002:
-//            let type = EmployeeType.contract
-//            let project = Project.p2002
-//            let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-//            print("Contract Employee")
+
             showDateOfBirthFields()
             showContractFields()
             
@@ -537,7 +506,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         hideSubMenus()
         hideAllLabelsAndTextFields()
         
-        
+        // Copied from the storyboard app, need to update to current setup
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -545,10 +514,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // This transfers the data to the second viewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is SecondViewController {
+            let targetViewController = segue.destination as? SecondViewController
+            
+            targetViewController?.passForVisitor = pass
+            targetViewController?.visitor = entrant
+
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
+    // Copied from the storyboard app, need to update to current setup
     @objc func keyboardWillShow(_ notfication: Notification) {
        // if let keyboardFrame = notfication.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             // let frame = keyboardFrame.cgRectValue

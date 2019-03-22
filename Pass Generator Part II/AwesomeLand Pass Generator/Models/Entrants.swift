@@ -8,6 +8,7 @@
 
 
 // These are the different kinds of entrants:
+// (with their subclasses)
 // Guests
 // Employees
 // Contract Employees

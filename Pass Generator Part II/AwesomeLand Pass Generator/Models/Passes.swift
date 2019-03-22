@@ -150,8 +150,10 @@ class SeniorGuestPass: Pass {
 }
 
 class ContractEmployeePass: Pass {
-    // override var accessAllRides: Bool { return false }
+    override var accessAllRides: Bool { return false }
     // These need to be fixed for different Project Numbers
+    // Probably with switch
+    
     /*
     override var accessToAmusementAreas: Bool { return true }
     override var accessToRideControlAreas: Bool { return false }
@@ -169,8 +171,8 @@ class ContractEmployeePass: Pass {
 class VendorPass: Pass {
     // override var accessAllRides: Bool { return false }
     
-     // These need to be fixed for different Project Numbers
-    
+    // These need to be fixed for different Project Numbers
+    // Prbably with switch
     
     override var passType: String { return
         TypeOfPass.vendor.rawValue

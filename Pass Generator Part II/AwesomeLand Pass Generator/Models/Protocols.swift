@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+// The assign pass methods are now all part of the Entrant Class
 // Each entrance has a registration protocol
 // Consisting of several checks
 
@@ -16,7 +16,7 @@ import Foundation
 protocol GuestProtocol {
     func isEligibleForFreeEntry() throws -> Bool
     func childRegistrationComplete() -> Bool
-    func assignPassToGuest(entrant: Guest) -> Pass?
+//    func assignPassToGuest(entrant: Guest) -> Pass?
     
 }
 
@@ -24,7 +24,7 @@ protocol GuestProtocol {
 protocol EmployeeProtocol {
     func employeeRegistrationCheck(entrant: Employee) throws
     func employeeRegistrationComplete(entrant: Employee) -> Bool
-    func assignPassToEmployee(entrant: Employee) -> Pass?
+//    func assignPassToEmployee(entrant: Employee) -> Pass?
     
 }
 
@@ -34,12 +34,12 @@ protocol ContractEmployeeProtocol {
     func contractEmployeeRegistrationCheck(entrant: ContractEmployee) throws
     func employeeRegistrationComplete(entrant: Employee) -> Bool
     func contractEmployeeRegistrationComplete(entrant: ContractEmployee) -> Bool
-    func assignPassToEmployee(entrant: Employee) -> Pass?
+//    func assignPassToEmployee(entrant: Employee) -> Pass?
 }
 
 // for Vendors:
 protocol VendorEntranceProtocol {
     func vendorRegistrationCheck(entrant: Vendor) throws
     func vendorRegistrationComplete(entrant: Vendor) -> Bool
-    func assignPassToVendor(entrant: Vendor) -> Pass?
+//    func assignPassToVendor(entrant: Vendor) -> Pass?
 }

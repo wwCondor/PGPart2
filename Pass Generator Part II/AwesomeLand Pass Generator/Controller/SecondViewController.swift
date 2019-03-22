@@ -10,7 +10,7 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
-    var visitor: String?
+    var visitor: Entrant?
     var passForVisitor: Pass?
     
     // var entrantSelected: Entrant?
@@ -50,6 +50,42 @@ class SecondViewController: UIViewController {
      }
      */
     
+    /*
+ 
+     switch forCheckpoint {
+     case .amusementArea: if pass.accessToAmusementAreas {
+     print("Welcome to AwesomeLand amusement area")
+     SoundManager.playAccessGrantedSound()
+     return true
+     }
+     case .kitchenArea: if pass.accessToKitchenAreas {
+     print("Welcome to the kitchen area. Smells good!")
+     SoundManager.playAccessGrantedSound()
+     return true
+     }
+     case.rideControlArea: if pass.accessToRideControlAreas {
+     print("Welcome to the ride control area")
+     SoundManager.playAccessGrantedSound()
+     return true
+     }
+     case.mainenanceArea: if pass.accessToMainenanceAreas {
+     print("Welcome to the maintenance area")
+     SoundManager.playAccessGrantedSound()
+     return true
+     }
+     case.officeArea: if pass.accessToOfficeAreas {
+     print("Welcome to the office area")
+     SoundManager.playAccessGrantedSound()
+     return true
+     }
+     }
+     
+     print("You have no access to this area.")
+     SoundManager.PlayAccessDeniedSound()
+     return false
+     }
+     
+ */
     
     // Permission to enter area is checked here
     // If access granted "testFlag" should turn green
@@ -61,6 +97,7 @@ class SecondViewController: UIViewController {
         
         switch sender {
             case amusementAccessTest:
+                AreaAccesPoint.check(pass: , forCheckpoint: <#T##Area#>)
                 print("Amusement Area")
 
             case skipLinesTest:
