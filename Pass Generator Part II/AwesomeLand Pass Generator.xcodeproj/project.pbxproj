@@ -30,7 +30,9 @@
 		0B76AA052237A9D7008FC0EF /* ViewDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76AA042237A9D7008FC0EF /* ViewDesign.swift */; };
 		0B76AA072237B027008FC0EF /* Scraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76AA062237B027008FC0EF /* Scraps.swift */; };
 		0B76AA092237C028008FC0EF /* OldTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76AA082237C028008FC0EF /* OldTestCases.swift */; };
-		0BBACD56222D4C8500F07685 /* InputCheckers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBACD55222D4C8500F07685 /* InputCheckers.swift */; };
+		0BBACD56222D4C8500F07685 /* InputChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBACD55222D4C8500F07685 /* InputChecker.swift */; };
+		0BCFC8D22244FF4600378AC8 /* ButtonBorderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */; };
+		0BCFC8D42245760200378AC8 /* SwipeResultColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +61,9 @@
 		0B76AA042237A9D7008FC0EF /* ViewDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDesign.swift; sourceTree = "<group>"; };
 		0B76AA062237B027008FC0EF /* Scraps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scraps.swift; sourceTree = "<group>"; };
 		0B76AA082237C028008FC0EF /* OldTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldTestCases.swift; sourceTree = "<group>"; };
-		0BBACD55222D4C8500F07685 /* InputCheckers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCheckers.swift; sourceTree = "<group>"; };
+		0BBACD55222D4C8500F07685 /* InputChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChecker.swift; sourceTree = "<group>"; };
+		0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBorderColor.swift; sourceTree = "<group>"; };
+		0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeResultColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +117,7 @@
 				0B02A2D0221BEB8E00B39CEB /* Passes.swift */,
 				0B02A2D4221BEBAF00B39CEB /* Swipes.swift */,
 				0B02A2D8221BEBCA00B39CEB /* Protocols.swift */,
-				0BBACD55222D4C8500F07685 /* InputCheckers.swift */,
+				0BBACD55222D4C8500F07685 /* InputChecker.swift */,
 				0B3575F32236617A008DC537 /* Enums */,
 			);
 			path = Models;
@@ -126,6 +130,8 @@
 				0B02A2BD221BEACB00B39CEB /* LaunchScreen.storyboard */,
 				0B02A2E5222C019000B39CEB /* ButtonDesign.swift */,
 				0B76AA042237A9D7008FC0EF /* ViewDesign.swift */,
+				0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */,
+				0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,14 +255,16 @@
 				0B76AA072237B027008FC0EF /* Scraps.swift in Sources */,
 				0B02A2E6222C019000B39CEB /* ButtonDesign.swift in Sources */,
 				0B3575F22236615B008DC537 /* EntrantTypes.swift in Sources */,
+				0BCFC8D22244FF4600378AC8 /* ButtonBorderColor.swift in Sources */,
 				0B02A2B7221BEAC900B39CEB /* ViewController.swift in Sources */,
 				0B22FC38223682320074A893 /* PassTypes.swift in Sources */,
 				0B02A2D5221BEBAF00B39CEB /* Swipes.swift in Sources */,
+				0BCFC8D42245760200378AC8 /* SwipeResultColor.swift in Sources */,
 				0B02A2CF221BEB7700B39CEB /* ParkEntrances.swift in Sources */,
 				0B02A2D9221BEBCA00B39CEB /* Protocols.swift in Sources */,
 				0B3575F52236620E008DC537 /* AreaAndPrivilegeTypes.swift in Sources */,
 				0B02A2CD221BEB4E00B39CEB /* SoundManager.swift in Sources */,
-				0BBACD56222D4C8500F07685 /* InputCheckers.swift in Sources */,
+				0BBACD56222D4C8500F07685 /* InputChecker.swift in Sources */,
 				0B02A2C7221BEB0900B39CEB /* Entrants.swift in Sources */,
 				0B02A2B5221BEAC900B39CEB /* AppDelegate.swift in Sources */,
 				0B02A2D3221BEB9C00B39CEB /* ErrorTypes.swift in Sources */,

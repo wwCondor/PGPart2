@@ -76,30 +76,7 @@ extension Entrant {
             return false
         }
         return false
-        
     }
-    
-    // This assign a pass to the guest
-    // For Classic and VIP guests there are no required checks
-    // Child goes through agecheck
-// This is done in Entrants Class
-//    func assignPassToGuest(entrant: Guest) -> Pass? {
-//
-//        if entrant.type == .classic {
-//            let pass = ClassicGuestPass(entrant: entrant)
-//            return pass
-//        } else if entrant.type == .vip {
-//            let pass = VIPPass(entrant: entrant)
-//            return pass
-//        } else if entrant.type == .freeChild {
-//            let childCheck = entrant.childRegistrationComplete()
-//            if childCheck == true {
-//                let pass = FreeChildPass(entrant: entrant)
-//                return pass
-//            }
-//        }
-//        return nil
-//    }
 }
 
 extension Entrant {
@@ -132,16 +109,6 @@ extension Entrant {
             return false
         }
     }
-//    This is done in Entrant Class
-//    static func assignPassToSenior(entrant: SeniorGuest) -> Pass? {
-//        let check = entrant.seniorRegistrationComplete(entrant: entrant)
-//        if check == true {
-//            let pass = SeniorGuestPass(entrant: entrant)
-//            return pass
-//        }
-//        return nil
-//    }
-//
 }
 
 extension Entrant {
@@ -189,17 +156,7 @@ extension Entrant {
             return false
         }
     }
-//    This is done in Entrant Class
-    
-//    static func assignPassToSeasonGuest(entrant: SeasonGuest) -> Pass? {
-//        let check = entrant.seasonRegistrationComplete(entrant: entrant)
-//        if check == true {
-//            let pass = SeasonPass(entrant: entrant)
-//            return pass
-//        }
-//        return nil
-//    }
-    
+ 
 }
 
 
@@ -279,36 +236,6 @@ extension Entrant {
             return false
         }
     }
-    
-    // This return pass if registration == true
-//  This is done in Entrant Class
-//    func assignPassToEmployee(entrant: Employee) -> Pass? {
-//        let employeeCheck = entrant.employeeRegistrationComplete(entrant: entrant)
-//        var pass: Pass?
-//
-//        if employeeCheck == true {
-//            switch entrant.type {
-//            case .manager: pass = ManagerPass(entrant: entrant)
-//            case .foodServices: pass = FoodServicesPass (entrant: entrant)
-//            case .rideServices: pass = RideServicesPass (entrant: entrant)
-//            case .maintenance: pass = MaintenancePass (entrant: entrant)
-//            default: break
-//            }
-//        }
-//
-//        return pass
-//    }
-//
-//    func assignPassToContractEmployee(entrant: ContractEmployee) -> Pass? {
-//        let employeeCheck = entrant.employeeRegistrationComplete(entrant: entrant)
-//        let contractEmployeeCheck = entrant.contractEmployeeRegistrationComplete(entrant: entrant)
-//        var pass: Pass?
-//
-//        if employeeCheck && contractEmployeeCheck == true {
-//            pass = ContractEmployeePass(entrant: entrant)
-//        }
-//        return pass
-//    }
 }
 
 
@@ -340,168 +267,7 @@ extension Entrant {
             return false
         }
     }
-//    // This is done in Entrant Class
-//    // This also do the standard Employee check?
-//    func assignPassToVendor(entrant: Vendor) -> Pass? {
-//        let check = entrant.vendorRegistrationComplete(entrant: entrant)
-//        var pass: Pass?
-//        if check == true {
-//            pass = VendorPass(entrant: entrant)
-//        }
-//        return pass
-//    }
+
 }
 
-
-/*
- extension Entrant {
- 
- func checkRequirements() throws -> Bool {
- // check requirements for guest type and throw errors
- switch self {
- case let guest as Guest:
- 
- if guest.firstName == "" {
- throw GuestRegistrationErrors.invalidFirstName
- } else if guest.lastName == "" {
- throw GuestRegistrationErrors.invalidLastName
- }
- 
- switch guest.type {
- case .freeChild:
- if guest.birthday == "" {
- throw GuestRegistrationErrors.noFreeChildBirthday
- } else if convertDate(birthdayDate: birthday) == nil {
- throw GuestRegistrationErrors.childBirthdayNotConvertibleToDate
- } else if let age = checkAge(birthdayDate: birthday) {
- if age > 5 {
- // birthday was checked for nil so force unwrap is safe
- throw GuestRegistrationErrors.invalidFreeChildBirthday
- }
- }
- case .senior:
- if guest.birthday == "" {
- throw GuestRegistrationErrors.noSeniorBirthday
- } else if convertDate(birthdayDate: birthday) == nil {
- throw GuestRegistrationErrors.seniorBirthdayNotConvertibleToDate
- // error if date cannot be converted
- } else if let age = checkAge(birthdayDate: birthday) {
- if age < 65 {
- // birthday was checked for nil so force unwrap is safe
- throw GuestRegistrationErrors.invalidSeniorBirthday
- // only allow senior if guest is 65+
- }
- }
- case .seasonPass:
- if guest.streetAddress == "" {
- throw GuestRegistrationErrors.invalidSeasonPassAddress
- } else if guest.city == "" {
- throw GuestRegistrationErrors.invalidSeasonPassCity
- } else if guest.state == "" {
- throw GuestRegistrationErrors.invalidSeasonPassState
- } else if guest.zipCode == nil {
- throw GuestRegistrationErrors.invalidSeasonPassZipCode
- }
- default:
- return true
- }
- // check requirements for employee type and throw errors
- case let employee as Employee:
- 
- if employee.firstName == "" {
- throw EmployeeRegistrationErrors.invalidFirstName
- } else if employee.lastName == "" {
- throw EmployeeRegistrationErrors.invalidLastName
- }
- 
- switch employee.type {
- case .foodService, .rideService, .maintenance, .manager:
- if employee.streetAddress == ""  {
- throw EmployeeRegistrationErrors.invalidAddress
- } else if employee.city == ""  {
- throw EmployeeRegistrationErrors.invalidCity
- } else if employee.state == "" {
- throw EmployeeRegistrationErrors.invalidState
- } else if employee.zipCode == nil {
- throw EmployeeRegistrationErrors.invalidZipCode
- }
- case .contractEmployee:
- if employee.streetAddress == "" {
- throw EmployeeRegistrationErrors.invalidAddress
- } else if employee.city == "" {
- throw EmployeeRegistrationErrors.invalidCity
- } else if employee.state == "" {
- throw EmployeeRegistrationErrors.invalidState
- } else if employee.zipCode == nil {
- throw EmployeeRegistrationErrors.invalidZipCode
- } else if employee.projectNumber == nil {
- throw EmployeeRegistrationErrors.invalidContractProjectNumber
- } else {
- if employee.projectNumber == .firstContract || employee.projectNumber == .secondContract || employee.projectNumber == .thirdContract || employee.projectNumber == .fourthContract || employee.projectNumber == .fifthContract {
- // ok, there is a match
- } else {
- throw EmployeeRegistrationErrors.contractNumberDoesntMatch
- }
- }
- case .vendor:
- if employee.visitDate == "" {
- throw EmployeeRegistrationErrors.invalidVendorVisitDate
- } else if employee.birthday == "" {
- throw EmployeeRegistrationErrors.invalidVendorBirthday
- } else if employee.vendorCompany == nil {
- throw EmployeeRegistrationErrors.invalidVendorCompany
- } else {
- if employee.vendorCompany == .acme || employee.vendorCompany == .fedex || employee.vendorCompany == .nwElectrical || employee.vendorCompany == VendorCompanies.orkin {
- // ok, there is a match
- } else {
- throw EmployeeRegistrationErrors.vendorCompanyNotListed
- }
- }
- }
- default:
- return true
- }
- return true // if switch is completed without throwing errors return true
- }
- 
- // run when checking freechild age, converting entered string into date
- func checkAge(birthdayDate: String?) -> Int? {
- let date = Date()
- 
- guard let convertedDate = convertDate(birthdayDate: birthdayDate) else { return nil }
- 
- // perform math with produced date compared to current date
- guard let difference = Calendar.current.dateComponents([.day], from: convertedDate, to: date).day else {
- print("Calculation failed")
- return nil
- }
- let age = difference / 365
- 
- print("Free child is \(age) years old")
- return age
- }
- 
- 
- // convert string to date
- func convertDate(birthdayDate: String?) -> Date? {
- if let birthday = birthdayDate {
- 
- let dateFormatter = DateFormatter()
- dateFormatter.dateFormat = "dd/MM/yyyy"
- let dateFromString = dateFormatter.date(from: birthday)
- 
- guard let convertedDate = dateFromString else {
- print("Date not convertable")
- return nil
- }
- return convertedDate
- } else {
- print("No birthday supplied for age check")
- return nil
- }
- }
- 
- }
- }
- */
 

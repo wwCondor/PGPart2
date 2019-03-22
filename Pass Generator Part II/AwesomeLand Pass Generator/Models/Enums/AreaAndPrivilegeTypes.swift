@@ -15,7 +15,7 @@ enum Area {
     case amusementArea
     case kitchenArea
     case rideControlArea
-    case mainenanceArea
+    case maintenanceArea
     case officeArea
 }
 

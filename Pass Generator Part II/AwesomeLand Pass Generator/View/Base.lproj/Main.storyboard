@@ -1122,13 +1122,13 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRr-aO-UXE">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRr-aO-UXE">
                                                 <rect key="frame" x="0.0" y="106.5" width="320" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lastname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wo-Xh-p5p">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company or Project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wo-Xh-p5p">
                                                 <rect key="frame" x="0.0" y="143" width="320" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -1153,6 +1153,14 @@
                                             <constraint firstItem="lXW-l3-cFx" firstAttribute="leading" secondItem="hmf-KB-Rib" secondAttribute="leading" id="yaN-8f-I6N"/>
                                         </constraints>
                                     </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I2W-dZ-qHv" userLabel="Logo View">
+                                        <rect key="frame" x="600" y="20" width="80" height="80"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Lxc-WG-Lhw"/>
+                                            <constraint firstAttribute="height" constant="80" id="cfx-ej-xXK"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1162,9 +1170,11 @@
                                     <constraint firstItem="ywd-eS-JoE" firstAttribute="leading" secondItem="hmf-KB-Rib" secondAttribute="trailing" constant="20" id="K0m-w1-MaZ"/>
                                     <constraint firstItem="lhW-CI-kx5" firstAttribute="leading" secondItem="Gf2-Rm-zJ3" secondAttribute="leading" constant="20" id="LHe-nP-rL9"/>
                                     <constraint firstItem="hmf-KB-Rib" firstAttribute="top" secondItem="Gf2-Rm-zJ3" secondAttribute="top" constant="20" id="Pa6-6a-hVd"/>
+                                    <constraint firstItem="I2W-dZ-qHv" firstAttribute="top" secondItem="Gf2-Rm-zJ3" secondAttribute="top" constant="20" id="Rot-O0-Oxb"/>
                                     <constraint firstItem="lhW-CI-kx5" firstAttribute="top" secondItem="Gf2-Rm-zJ3" secondAttribute="top" constant="20" id="mPf-ue-YdU"/>
                                     <constraint firstAttribute="trailing" secondItem="ywd-eS-JoE" secondAttribute="trailing" constant="20" id="pGY-xE-ak9"/>
                                     <constraint firstAttribute="bottom" secondItem="ywd-eS-JoE" secondAttribute="bottom" constant="20" id="qe9-HL-emr"/>
+                                    <constraint firstAttribute="trailing" secondItem="I2W-dZ-qHv" secondAttribute="trailing" constant="20" id="wcP-R9-4qG"/>
                                     <constraint firstAttribute="bottom" secondItem="lhW-CI-kx5" secondAttribute="bottom" constant="20" id="z1l-ou-gbN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -1183,7 +1193,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.79763770389999999" green="0.95894449950000005" blue="0.70822689250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="k5w-ow-jAN" firstAttribute="centerY" secondItem="9Kj-AE-mjE" secondAttribute="centerY" id="16Q-xK-Qe4"/>
                                     <constraint firstItem="k5w-ow-jAN" firstAttribute="centerX" secondItem="9Kj-AE-mjE" secondAttribute="centerX" id="90I-a8-51B"/>
@@ -1471,18 +1481,21 @@
                     </view>
                     <connections>
                         <outlet property="amusementAccessTest" destination="lHv-JM-tN5" id="jra-6t-cWr"/>
-                        <outlet property="firstNameLabel" destination="5Wo-Xh-p5p" id="63v-xg-VLE"/>
+                        <outlet property="companyLogo" destination="I2W-dZ-qHv" id="VZB-tP-RrC"/>
+                        <outlet property="dobLabel" destination="Wmf-o8-qFH" id="ffP-8A-F9w"/>
                         <outlet property="foodDiscountTest" destination="NsS-Fc-3qW" id="egK-fJ-aL2"/>
                         <outlet property="kitchenAccessTest" destination="hFe-oW-L8E" id="j8I-cc-TeF"/>
                         <outlet property="maintenanceAccessTest" destination="eMP-HM-uDC" id="zDO-xI-dVE"/>
                         <outlet property="merchDiscountTest" destination="VpL-N5-Z8w" id="47K-lC-phm"/>
+                        <outlet property="nameLabel" destination="YRr-aO-UXE" id="x3v-Lf-VKv"/>
                         <outlet property="officeAccessTest" destination="DvY-eY-X8y" id="v51-Wl-RLF"/>
+                        <outlet property="projectOrCompanyLabel" destination="5Wo-Xh-p5p" id="V88-tb-HBS"/>
                         <outlet property="rideControlAccessTest" destination="huK-7Y-sps" id="2g5-e7-7Rs"/>
                         <outlet property="skipLinesTest" destination="P0Z-eG-2Fa" id="Kbm-9K-ejK"/>
                         <outlet property="testFlag" destination="9Kj-AE-mjE" id="7Mo-sF-dUo"/>
                         <outlet property="testResultLabel" destination="k5w-ow-jAN" id="aai-11-cyb"/>
                         <outlet property="testResultView" destination="9Kj-AE-mjE" id="mWK-AI-VNX"/>
-                        <outlet property="typeOfPassLabel" destination="lXW-l3-cFx" id="MQN-3l-EZL"/>
+                        <outlet property="typeOfPassLabel" destination="lXW-l3-cFx" id="4ho-Vq-N4L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajn-Sy-ffZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

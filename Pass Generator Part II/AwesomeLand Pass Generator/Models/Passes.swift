@@ -155,11 +155,11 @@ class ContractEmployeePass: Pass {
     // Probably with switch
     
     /*
-    override var accessToAmusementAreas: Bool { return true }
-    override var accessToRideControlAreas: Bool { return false }
-    override var accessToKitchenAreas: Bool { return false }
-    override var accessToMainenanceAreas: Bool { return false }
-    override var accessToOfficeAreas: Bool { return false }
+     override var accessToAmusementAreas: Bool { return true }
+     override var accessToRideControlAreas: Bool { return false }
+     override var accessToKitchenAreas: Bool { return false }
+     override var accessToMainenanceAreas: Bool { return false }
+     override var accessToOfficeAreas: Bool { return false }
     */
     
     override var passType: String { return

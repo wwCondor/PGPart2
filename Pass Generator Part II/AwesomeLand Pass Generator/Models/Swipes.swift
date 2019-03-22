@@ -41,7 +41,7 @@ class BirthdayCheck {
 }
 
 // Here the generated passes are swiped for each area or privilege
-
+// This could go to the override directly?
 struct AreaAccesPoint {
     
   static func additionalAreaAccess(area: Area, company: Company, project: Project) -> Bool {
@@ -56,7 +56,7 @@ struct AreaAccesPoint {
         case .kitchenArea: if company == .acme || company == .orkin || company == .nwElectrical || project == .p1003 || project == .p2002 {
             return true
             }
-        case .mainenanceArea: if company == .fedex || company == .nwElectrical || project == .p1002 || project == .p1003 || project == .p2002 {
+        case .maintenanceArea: if company == .fedex || company == .nwElectrical || project == .p1002 || project == .p1003 || project == .p2002 {
             return true
             }
         case .officeArea: if company == .fedex || company == .nwElectrical || project == .p1003 || project == .p2001 {
@@ -93,17 +93,17 @@ struct AreaAccesPoint {
             SoundManager.playAccessGrantedSound()
             return true
             }
-        case.rideControlArea: if pass.accessToRideControlAreas {
+        case .rideControlArea: if pass.accessToRideControlAreas {
             print("Welcome to the ride control area")
             SoundManager.playAccessGrantedSound()
             return true
             }
-        case.mainenanceArea: if pass.accessToMainenanceAreas {
+        case .maintenanceArea: if pass.accessToMainenanceAreas {
             print("Welcome to the maintenance area")
             SoundManager.playAccessGrantedSound()
             return true
             }
-        case.officeArea: if pass.accessToOfficeAreas {
+        case .officeArea: if pass.accessToOfficeAreas {
             print("Welcome to the office area")
             SoundManager.playAccessGrantedSound()
             return true

@@ -10,8 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
-    let colorSelected: UIColor = UIColor(red: 241/255, green: 153/255, blue: 55/255, alpha: 1.0)
-    
+
     // These are all the textfields
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -107,9 +106,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         guard let ssn = ssnTF.text else { return }
         guard let dateOfVisit = dateOfVisitTF.text else { return }
         
+        // These have been moved outide the method
         // var entrant: Entrant?
         // var pass: Pass?
         
+        // Depending on which buttons have been selected these are the initializers
+        // These are the guestButton inits
         if guestButton.isSelected {
             if classic.isSelected {
                 let type = GuestType.classic
@@ -127,7 +129,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let type = GuestType.senior
                 entrant = SeniorGuest(firstName: firstName, lastName: lastName, type: type, birthday: birthday)
             }
-    
+        
+        // These are the employeeButton inits
         } else if employeeButton.isSelected {
             if manager.isSelected {
                 let type = EmployeeType.manager
@@ -142,7 +145,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let type = EmployeeType.maintenance
                 entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             }
-            
+         
+        // These are the contractButton inits
         } else if contractButton.isSelected {
             if project1001.isSelected {
                 let type = EmployeeType.contract
@@ -165,7 +169,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let project = Project.p2002
                 entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
             }
-            
+        
+        // These are the vendorButton inits
         } else if vendorButton.isSelected {
             if acme.isSelected {
                 let type = Company.acme
@@ -183,29 +188,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
         }
         
-        // let classGuestPass = guestClassic.assignPassToGuest(entrant: guestClassic)
-        
+        // If entrant has been created, a pass can be created as well.
+        // If pass is not nil, we can safely go to second viewController
         if let entrant = entrant {
             pass = entrant.assignPass(entrant: entrant)
-            
-            if pass != nil {
             performSegue(withIdentifier: "PassSegue", sender: self)
-            }
         }
-        
-        /*
-         let guestClassic = Guest(type: .classic, birthday: "01-03-1984")
-         let classGuestPass = guestClassic.assignPassToGuest(entrant: guestClassic)
-         if let classGuestPass = classGuestPass {
-         AreaAccesPoint.check(pass: classGuestPass, forCheckpoint: .officeArea) // should have access
-         AreaAccesPoint.check(pass: classGuestPass, forCheckpoint: .amusementArea) // should not have accedd
-         PrivilegeSwipe.swipe(pass: classGuestPass, toCheck: .discountForMerchandise)
-         PrivilegeSwipe.swipe(pass: classGuestPass, toCheck: .discountForFood)
-         PrivilegeSwipe.swipe(pass: classGuestPass, toCheck: .skipLines)
-         }
-         */
-        
-        // performSegue(withIdentifier: "PassSegue", sender: self)
     }
     
     func hideSubMenus() {
@@ -302,7 +290,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
  
     }
     
-    
     // These show parts of the form needed for entrant
     func showSocialSecurityNumber() {
         ssn.isHidden = false
@@ -346,9 +333,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
         dateOfVisitTF.isHidden = false
     }
     
+    // These functions handle changing border color of the buttons when selected
+    func resetSubMenuHighlight() {
+        classic.borderColor = UIColor.BorderColor.subMenuBorderColor
+        vip.borderColor = UIColor.BorderColor.subMenuBorderColor
+        freeChild.borderColor = UIColor.BorderColor.subMenuBorderColor
+        season.borderColor = UIColor.BorderColor.subMenuBorderColor
+        senior.borderColor = UIColor.BorderColor.subMenuBorderColor
+        manager.borderColor = UIColor.BorderColor.subMenuBorderColor
+        foodServices.borderColor = UIColor.BorderColor.subMenuBorderColor
+        rideServices.borderColor = UIColor.BorderColor.subMenuBorderColor
+        maintenance.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project1001.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project1002.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project1003.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project2001.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project2002.borderColor = UIColor.BorderColor.subMenuBorderColor
+        acme.borderColor = UIColor.BorderColor.subMenuBorderColor
+        orkin.borderColor = UIColor.BorderColor.subMenuBorderColor
+        fedex.borderColor = UIColor.BorderColor.subMenuBorderColor
+        nwElectrical.borderColor = UIColor.BorderColor.subMenuBorderColor
+    }
+    
+    func resetMainMenuHighlight() {
+        guestButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        employeeButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        vendorButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        contractButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+    }
+    
     // MARK: - Main Menu Selection
     @IBAction func mainMenuButtonManager(_ sender: UIButton) {
-        // sender.borderColor(colorSelected)
+        resetSubMenuHighlight()
+        resetMainMenuHighlight()
+        sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor
+
+      //  guestButton.addTarget(self, action: #selector(startHighlight), for: .touchDown)
         
         hideSubMenus()
         hideAllLabelsAndTextFields()
@@ -373,47 +393,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Sub Menu Selection
     @IBAction func subMenuButtonManager(_ sender: UIButton) {
-         // sender.layer.borderColor = colorSelected.cgColor
+         resetSubMenuHighlight()
+         sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor
         
          hideAllLabelsAndTextFields()
         
         switch sender {
         case classic:
-//            let type = GuestType.classic
-//            let entrant = Guest(type: type, birthday: birthday)
             print("Classic")
             showDateOfBirthFields()
-            //        showGuestMenu()
-            
         case vip:
-//            let type = GuestType.vip
-//            let entrant = Guest(type: type, birthday: birthday)
             print("VIP")
             showDateOfBirthFields()
-            //        showGuestMenu()
-            
         case freeChild:
-//            let type = GuestType.freeChild
-//            let entrant = Guest(type: type, birthday: birthday)
             print("Free Child")
             showDateOfBirthFields()
-            //        showGuestMenu()
-            
         case season:
-//            let type = GuestType.season
-//            let entrant = SeasonGuest(firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, type: type, birthday: birthday)
             print("Season")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
-            //        showGuestMenu()
-            
         case senior:
             print("Senior")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showDateOfBirthFields()
-            
         case manager:
             print("Manager")
             showDateOfBirthFields()
@@ -421,97 +425,73 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showStreetAddressStateZipFields()
             showDateOfBirthFields()
             showSocialSecurityNumber()
-            
         case foodServices:
             print("Food Service")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showSocialSecurityNumber()
-            
         case rideServices:
             print("Ride Service")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showSocialSecurityNumber()
-            
         case maintenance:
             print("Maintenance")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showSocialSecurityNumber()
-            
         case acme:
             print("Acme")
             showDateOfBirthFields()
             showVendorFields()
-            
         case orkin:
             print("Orkin")
             showDateOfBirthFields()
             showVendorFields()
-            
         case fedex:
-
             print("Fedex")
             showDateOfBirthFields()
             showVendorFields()
-            
         case nwElectrical:
-
             print("NW Electrical")
             showDateOfBirthFields()
             showVendorFields()
-            
         case project1001:
-
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-            
         case project1002:
-
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-            
         case project1003:
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-            
         case project2001:
-
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-            
         case project2002:
-
             showDateOfBirthFields()
             showContractFields()
-            
         default:
             break
+            
         }
     }
-    
-   
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideSubMenus()
         hideAllLabelsAndTextFields()
         
-        // Copied from the storyboard app, need to update to current setup
+        // The keyboard code is copied from the storyboard app, need to update to current setup
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        // Do any additional setup after loading the view, typically from a nib.
-        
     }
     
     // This transfers the data to the second viewController
@@ -521,9 +501,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             targetViewController?.passForVisitor = pass
             targetViewController?.visitor = entrant
-
         }
     }
+    // targetViewController?.visitor = entrant // not needed?
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -538,7 +519,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
             }
-        // }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
@@ -548,146 +528,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.view.layoutIfNeeded()
         }
     }
-    
-   
-    
 }
-
-
-
-/*
- var firstNameEntered: String?
- var lastNameEntered: String?
- var dateOfBirthEntered: String?
- 
- var streetEntered: String?
- var cityEntered: String?
- var stateEntered: String?
- var zipCodeEntered: String?
- 
- var ssnEntered: Int?
- var projectEntered: Project?
- var vendorEntered: Company?
- var dateOfVisitEntered: String?
- */
-
-/*
- func showAllLabelsAndTextFields() {
- 
- // Hides submenu buttons
- // hideSubMenuStacks()
- 
- // Hides Labels and Textfields
- firstName.isHidden = false
- firstNameTF.isHidden = false
- lastName.isHidden = false
- lastNameTF.isHidden = false
- dateOfBirth.isHidden = false
- dateOfBirthTF.isHidden = false
- streetAddress.isHidden = false
- streetAddressTF.isHidden = false
- city.isHidden = false
- cityTF.isHidden = false
- state.isHidden = false
- stateTF.isHidden = false
- zipCode.isHidden = false
- zipCodeTF.isHidden = false
- ssn.isHidden = false
- ssnTF.isHidden = false
- dateOfVisit.isHidden = false
- dateOfVisitTF.isHidden = false
- 
- }
- */
-
-
-/*
- // CreateButton Content
- 
- guard let firstName = firstNameTF.text else { return }
- guard let lastName = lastNameTF.text else { return }
- guard let birthday = dateOfBirthTF.text else { return }
- 
- guard let street = streetAddressTF.text else { return }
- guard let city = cityTF.text else { return }
- guard let state = stateTF.text else { return }
- guard let zipCode = zipCodeTF.text else { return }
- 
- guard let ssn = ssnTF.text else { return }
- guard let dateOfVisit = dateOfVisitTF.text else { return }
- 
- var entrant: Entrant?
- 
- if guestButton.isSelected {
- if classic.isSelected {
- let type = GuestType.classic
- entrant = Guest(type: type, birthday: birthday)
- } else if vip.isSelected {
- let type = GuestType.vip
- entrant = Guest(type: type, birthday: birthday)
- } else if freeChild.isSelected {
- let type = GuestType.freeChild
- let entrant = Guest(type: type, birthday: birthday)
- } else if season.isSelected {
- let type = GuestType.season
- let entrant = SeasonGuest(firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, type: type, birthday: birthday)
- } else if senior.isSelected {
- let type = GuestType.senior
- let entrant = SeniorGuest(firstName: firstName, lastName: lastName, type: type, birthday: birthday)
- }
- 
- } else if employeeButton.isSelected {
- if manager.isSelected {
- let type = EmployeeType.manager
- let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if foodServices.isSelected {
- let type = EmployeeType.foodServices
- let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if rideServices.isSelected {
- let type = EmployeeType.rideServices
- let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if maintenance.isSelected {
- let type = EmployeeType.maintenance
- let entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- }
- 
- } else if contractButton.isSelected {
- if project1001.isSelected {
- let type = EmployeeType.contract
- let project = Project.p1001
- let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if project1002.isSelected {
- let type = EmployeeType.contract
- let project = Project.p1002
- let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if project1003.isSelected {
- let type = EmployeeType.contract
- let project = Project.p1003
- let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if project2001.isSelected {
- let type = EmployeeType.contract
- let project = Project.p2001
- let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- } else if project2002.isSelected {
- let type = EmployeeType.contract
- let project = Project.p2002
- let entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
- }
- 
- } else if vendorButton.isSelected {
- if acme.isSelected {
- let type = Company.acme
- let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
- } else  if orkin.isSelected {
- let type = Company.orkin
- let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
- } else  if fedex.isSelected {
- let type = Company.fedex
- let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
- } else  if nwElectrical.isSelected {
- let type = Company.nwElectrical
- let entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
- }
- }
- */
 

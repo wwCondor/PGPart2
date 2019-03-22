@@ -17,8 +17,8 @@
 // Entrant is the superclass
 class Entrant {
     var birthday: String?
-    
-    init(birthday: String?) {
+
+    init (birthday: String?) {
         self.birthday = birthday
     }
     
@@ -126,7 +126,6 @@ class Entrant {
     }
 }
 
-
 class Guest: Entrant, GuestProtocol { // Guest need to conform Guest protocol
     var type: GuestType
     
@@ -172,7 +171,6 @@ class SeniorGuest: Guest {
     }
 }
 
-
 // Employees need to fill in the following information
 class Employee: Entrant, EmployeeProtocol { // These need to conform Employee protocol
     var type: EmployeeType
@@ -197,8 +195,6 @@ class Employee: Entrant, EmployeeProtocol { // These need to conform Employee pr
     }
 }
 
-
-
 // Contract Empoyees are an Employee subclass
 class ContractEmployee: Employee {
     var socialSecurityNumber: String
@@ -212,8 +208,6 @@ class ContractEmployee: Employee {
         super.init(type: type, firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, birthday: birthday)
     }
 }
-
-
 
 // Vendor is a subclass for Entrant and conforms VendorProtocol
 class Vendor: Entrant { //, VendorProtocol {
