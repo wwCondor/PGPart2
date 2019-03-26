@@ -13,11 +13,15 @@ import Foundation
 
 enum RegistrationError: Error {
     case missingBirthday
+    
     case ageCalculationFailed
     case dateConversionFailed
     case ageNotUnderFive
+    case ageNotOverSixtyFive
+    
     case missingFirstName
     case missingLastName
+    case lenghtName
     
     case missingStreetAddress
     case missingCity

@@ -83,10 +83,33 @@ extension Entrant {
     func seniorRegistrationCheck(entrant: SeniorGuest) throws {
         if entrant.firstName == "" {
             throw RegistrationError.missingFirstName
+        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
+            throw RegistrationError.lenghtName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
+        }
+        
+        guard let birthday = birthday else {
+            throw RegistrationError.missingBirthday
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let dateStringProvided = dateFormatter.date(from: birthday)
+        
+        guard let dateConverted = dateStringProvided else {
+            throw RegistrationError.dateConversionFailed
+        }
+        
+        guard let age = Calendar.current.dateComponents([.year], from: dateConverted, to: Date()).year else {
+            throw RegistrationError.ageCalculationFailed
+        }
+        
+        if age < 65 {
+            throw RegistrationError.ageNotOverSixtyFive
+            
         }
     }
     
@@ -101,8 +124,20 @@ extension Entrant {
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
+        } catch RegistrationError.lenghtName {
+            print("First or last name may not exceed 16 characters")
+            return false
         } catch RegistrationError.missingBirthday {
             print("Please enter your date of birth on the registration form")
+            return false
+        } catch RegistrationError.dateConversionFailed {
+            print("Date conversion failed")
+            return false
+        } catch RegistrationError.ageCalculationFailed {
+            print("Age calculation failed")
+            return false
+        } catch RegistrationError.ageNotOverSixtyFive {
+            print("Age not under 65")
             return false
         } catch {
             print("Unexpected error: \(error).")
@@ -117,6 +152,8 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
+        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
+            throw RegistrationError.lenghtName
         } else if entrant.streetAddress == "" {
             throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
@@ -138,6 +175,9 @@ extension Entrant {
             return false
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
+            return false
+        } catch RegistrationError.lenghtName {
+            print("First or last name may not exceed 16 characters")
             return false
         } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
@@ -170,6 +210,8 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
+        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
+            throw RegistrationError.lenghtName
         } else if entrant.streetAddress == "" {
             throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
@@ -194,6 +236,9 @@ extension Entrant {
             return false
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
+            return false
+        } catch RegistrationError.lenghtName {
+            print("First or last name may not exceed 16 characters")
             return false
         } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
@@ -221,6 +266,8 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
+        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
+            throw RegistrationError.lenghtName
         } else if entrant.streetAddress == "" {
             throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
@@ -245,6 +292,9 @@ extension Entrant {
             return false
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
+            return false
+        } catch RegistrationError.lenghtName {
+            print("First or last name may not exceed 16 characters")
             return false
         } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
@@ -278,6 +328,8 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
+        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
+            throw RegistrationError.lenghtName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
         } else if entrant.visitingDate == "" {
@@ -295,6 +347,9 @@ extension Entrant {
             return false
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
+            return false
+        } catch RegistrationError.lenghtName {
+            print("First or last name may not exceed 16 characters")
             return false
         } catch RegistrationError.missingBirthday {
             print("Please enter date of birth")

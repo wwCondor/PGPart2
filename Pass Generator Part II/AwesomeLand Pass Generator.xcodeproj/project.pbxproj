@@ -31,7 +31,6 @@
 		0BBACD56222D4C8500F07685 /* MockupGuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBACD55222D4C8500F07685 /* MockupGuest.swift */; };
 		0BCFC8D22244FF4600378AC8 /* ButtonBorderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */; };
 		0BCFC8D42245760200378AC8 /* SwipeResultColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */; };
-		0BCFC8D8224A361000378AC8 /* CodeScraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D7224A361000378AC8 /* CodeScraps.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +60,6 @@
 		0BBACD55222D4C8500F07685 /* MockupGuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupGuest.swift; sourceTree = "<group>"; };
 		0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBorderColor.swift; sourceTree = "<group>"; };
 		0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeResultColor.swift; sourceTree = "<group>"; };
-		0BCFC8D7224A361000378AC8 /* CodeScraps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeScraps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +99,6 @@
 				0B02A2CA221BEB2B00B39CEB /* Timer */,
 				0B02A2C0221BEACB00B39CEB /* Info.plist */,
 				0B02A2BB221BEACB00B39CEB /* Assets.xcassets */,
-				0BCFC8D7224A361000378AC8 /* CodeScraps.swift */,
 			);
 			path = "AwesomeLand Pass Generator";
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 				0B02A2C7221BEB0900B39CEB /* Entrants.swift in Sources */,
 				0B02A2B5221BEAC900B39CEB /* AppDelegate.swift in Sources */,
 				0B02A2D3221BEB9C00B39CEB /* Errors.swift in Sources */,
-				0BCFC8D8224A361000378AC8 /* CodeScraps.swift in Sources */,
 				0B76AA052237A9D7008FC0EF /* ViewDesign.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
