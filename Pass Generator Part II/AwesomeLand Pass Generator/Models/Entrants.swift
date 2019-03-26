@@ -38,6 +38,9 @@ class Entrant {
                 if childSuccess == true {
                     let pass = FreeChildPass(entrant: guest)
                     return pass
+                } else {
+                    print("Submission not errorfree")
+                    return nil
                 }
             case .vip:
                 let pass = VIPPass(entrant: guest)
@@ -48,8 +51,9 @@ class Entrant {
             }
             
         case is SeasonGuest:
+
             guard let seasonGuest = entrant as? SeasonGuest else { return nil }
-            
+
             let seasonSuccess = seasonRegistrationComplete(entrant: seasonGuest)
             if seasonSuccess {
                 let pass = SeasonPass(entrant: seasonGuest)
@@ -90,46 +94,73 @@ class Entrant {
                 case .rideServices:
                     let pass = RideServicesPass(entrant: employee)
                     return pass
-                default: break
+                default: return nil
                 }
             } else {
                 return nil
             }
         case is ContractEmployee:
-            guard let contractee = entrant as? ContractEmployee else { return nil }
+            guard let contractee = entrant as? ContractEmployee else {
+                return nil
+            }
             
             let contractSucces = contractEmployeeRegistrationComplete(entrant: contractee)
             
             if contractSucces {
-                let pass = ContractEmployeePass(entrant: contractee)
-                return pass
+                switch contractee.projectNumber {
+                case .p1001:
+                    let pass = ContractP1001Pass(entrant: contractee)
+                    return pass
+                case .p1002:
+                    let pass = ContractP1002Pass(entrant: contractee)
+                    return pass
+                case .p1003:
+                    let pass = ContractP1003Pass(entrant: contractee)
+                    return pass
+                case .p2001:
+                    let pass = ContractP2001Pass(entrant: contractee)
+                    return pass
+                case .p2002:
+                    let pass = ContractP2002Pass(entrant: contractee)
+                    return pass
+                }
             } else {
                 return nil
             }
-            
         case is Vendor:
             guard let vendor = entrant as? Vendor else { return nil }
             
             let success = vendorRegistrationComplete(entrant: vendor)
             
             if success {
-                let pass = VendorPass(entrant: vendor)
-                return pass
+                switch vendor.company {
+                case .acme:
+                    let pass = AcmeVendorPass(entrant: vendor)
+                    return pass
+                case .orkin:
+                    let pass = OrkinVendorPass(entrant: vendor)
+                    return pass
+                case .fedex:
+                    let pass = FedexVendorPass(entrant: vendor)
+                    return pass
+                case .nwElectrical:
+                    let pass = NWElectricalVendorPass(entrant: vendor)
+                    return pass
+                }
             } else {
                 return nil
             }
-            
         default:
             return nil
         }
-        return nil
+       return nil
     }
 }
 
 class Guest: Entrant, GuestProtocol { // Guest need to conform Guest protocol
     var type: GuestType
     
-    init(type: GuestType, birthday: String?) { // birthday: String?
+    init(type: GuestType, birthday: String?) {
         self.type = type
         
         super.init(birthday: birthday)
@@ -180,8 +211,9 @@ class Employee: Entrant, EmployeeProtocol { // These need to conform Employee pr
     var city: String
     var state: String
     var zipCode: String
+    var ssn: String
     
-    init(type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, birthday: String?) {
+    init(type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, ssn: String, birthday: String?) {
         
         self.type = type
         self.firstName = firstName
@@ -190,6 +222,7 @@ class Employee: Entrant, EmployeeProtocol { // These need to conform Employee pr
         self.city = city
         self.state = state
         self.zipCode = zipCode
+        self.ssn = ssn
         
         super.init(birthday: birthday)
     }
@@ -197,20 +230,18 @@ class Employee: Entrant, EmployeeProtocol { // These need to conform Employee pr
 
 // Contract Empoyees are an Employee subclass
 class ContractEmployee: Employee {
-    var socialSecurityNumber: String
     var projectNumber: Project
     
-    init(socialSecurityNumber: String, projectNumber: Project, type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, birthday: String?) {
+    init(projectNumber: Project, type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, ssn: String, birthday: String?) {
         
-        self.socialSecurityNumber = socialSecurityNumber
         self.projectNumber = projectNumber
         
-        super.init(type: type, firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, birthday: birthday)
+        super.init(type: type, firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
     }
 }
 
 // Vendor is a subclass for Entrant and conforms VendorProtocol
-class Vendor: Entrant { //, VendorProtocol {
+class Vendor: Entrant { 
     var company: Company
     var firstName: String
     var lastName: String

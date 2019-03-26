@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // This View contains all the information input fields
     @IBOutlet weak var informationView: UIView!
     
-    // Optional pass variable
+    // Optionals
     var pass: Pass?
     var entrant: Entrant?
     
@@ -48,30 +48,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var vendorButton: UIButton!
     
     // This is the employee submenu
-    @IBOutlet weak var manager: UIButton!
-    @IBOutlet weak var foodServices: UIButton!
-    @IBOutlet weak var rideServices: UIButton!
-    @IBOutlet weak var maintenance: UIButton!
+    @IBOutlet weak var managerButton: UIButton!
+    @IBOutlet weak var foodServicesButton: UIButton!
+    @IBOutlet weak var rideServicesButton: UIButton!
+    @IBOutlet weak var maintenanceButton: UIButton!
     
     // This is the guest submenu
-    @IBOutlet weak var classic: UIButton!
-    @IBOutlet weak var vip: UIButton!
-    @IBOutlet weak var freeChild: UIButton!
-    @IBOutlet weak var season: UIButton!
-    @IBOutlet weak var senior: UIButton!
+    @IBOutlet weak var classicButton: UIButton!
+    @IBOutlet weak var vipButton: UIButton!
+    @IBOutlet weak var freeChildButton: UIButton!
+    @IBOutlet weak var seasonButton: UIButton!
+    @IBOutlet weak var seniorButton: UIButton!
     
     // This is the contractor submenu
-    @IBOutlet weak var project1001: UIButton!
-    @IBOutlet weak var project1002: UIButton!
-    @IBOutlet weak var project1003: UIButton!
-    @IBOutlet weak var project2001: UIButton!
-    @IBOutlet weak var project2002: UIButton!
+    @IBOutlet weak var project1001Button: UIButton!
+    @IBOutlet weak var project1002Button: UIButton!
+    @IBOutlet weak var project1003Button: UIButton!
+    @IBOutlet weak var project2001Button: UIButton!
+    @IBOutlet weak var project2002Button: UIButton!
     
     // This is the vendor submenu
-    @IBOutlet weak var acme: UIButton!
-    @IBOutlet weak var orkin: UIButton!
-    @IBOutlet weak var fedex: UIButton!
-    @IBOutlet weak var nwElectrical: UIButton!
+    @IBOutlet weak var acmeButton: UIButton!
+    @IBOutlet weak var orkinButton: UIButton!
+    @IBOutlet weak var fedexButton: UIButton!
+    @IBOutlet weak var nwElectricalButton: UIButton!
     
     // These are the views that hold the submenu stacks
     @IBOutlet weak var employeeView: UIView!
@@ -106,94 +106,257 @@ class ViewController: UIViewController, UITextFieldDelegate {
         guard let ssn = ssnTF.text else { return }
         guard let dateOfVisit = dateOfVisitTF.text else { return }
         
-        // These have been moved outide the method
-        // var entrant: Entrant?
-        // var pass: Pass?
-        
         // Depending on which buttons have been selected these are the initializers
         // These are the guestButton inits
         if guestButton.isSelected {
-            if classic.isSelected {
+            if classicButton.isSelected {
                 let type = GuestType.classic
                 entrant = Guest(type: type, birthday: birthday)
-            } else if vip.isSelected {
+            } else if vipButton.isSelected {
                 let type = GuestType.vip
                 entrant = Guest(type: type, birthday: birthday)
-            } else if freeChild.isSelected {
+            } else if freeChildButton.isSelected {
                 let type = GuestType.freeChild
                 entrant = Guest(type: type, birthday: birthday)
-            } else if season.isSelected {
+            } else if seasonButton.isSelected {
                 let type = GuestType.season
                 entrant = SeasonGuest(firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, type: type, birthday: birthday)
-            } else if senior.isSelected {
+            } else if seniorButton.isSelected {
                 let type = GuestType.senior
                 entrant = SeniorGuest(firstName: firstName, lastName: lastName, type: type, birthday: birthday)
             }
         
         // These are the employeeButton inits
         } else if employeeButton.isSelected {
-            if manager.isSelected {
+            if managerButton.isSelected {
                 let type = EmployeeType.manager
-                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if foodServices.isSelected {
+                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if foodServicesButton.isSelected {
                 let type = EmployeeType.foodServices
-                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if rideServices.isSelected {
+                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if rideServicesButton.isSelected {
                 let type = EmployeeType.rideServices
-                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if maintenance.isSelected {
+                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if maintenanceButton.isSelected {
                 let type = EmployeeType.maintenance
-                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
+                entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
             }
          
         // These are the contractButton inits
         } else if contractButton.isSelected {
-            if project1001.isSelected {
+            if project1001Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p1001
-                entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if project1002.isSelected {
+                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if project1002Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p1002
-                entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if project1003.isSelected {
+                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if project1003Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p1003
-                entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if project2001.isSelected {
+                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if project2001Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p2001
-                entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
-            } else if project2002.isSelected {
+                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+            } else if project2002Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p2002
-                entrant = ContractEmployee(socialSecurityNumber: ssn, projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, birthday: birthday)
+                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
             }
         
         // These are the vendorButton inits
         } else if vendorButton.isSelected {
-            if acme.isSelected {
+            if acmeButton.isSelected {
                 let type = Company.acme
                 entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
-            } else  if orkin.isSelected {
+            } else  if orkinButton.isSelected {
                 let type = Company.orkin
                 entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
-            } else  if fedex.isSelected {
+            } else  if fedexButton.isSelected {
                 let type = Company.fedex
                 entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
-            } else  if nwElectrical.isSelected {
+            } else  if nwElectricalButton.isSelected {
                 let type = Company.nwElectrical
                 entrant = Vendor(company: type, firstName: firstName, lastName: lastName, visitingDate: dateOfVisit, birthday: birthday)
             }
             
         }
-        
+//        let childSucces = entrant?.childRegistrationComplete()
+//        let seasonSucces = entrant?.seasonRegistrationComplete(entrant: entrant) as? SeasonGuest
         // If entrant has been created, a pass can be created as well.
-        // If pass is not nil, we can safely go to second viewController
+        // MARK: - SEGUE
+        // if entrant = entrant && if either of the registrations is complete sgue may perform
+        // Add registration complete condition
         if let entrant = entrant {
+//            let succesChild = entrant.childRegistrationComplete()
+//            let eployeeSucces = entrant.employeeRegistrationComplete(entrant: entrant) ||
+//                entrant.seasonRegistrationComplete(entrant: entrant)  ||
+//                entrant.seniorRegistrationComplete(entrant: entrant)  ||
+//                entrant.vendorRegistrationComplete(entrant: entrant) == true
+//            {
             pass = entrant.assignPass(entrant: entrant)
             performSegue(withIdentifier: "PassSegue", sender: self)
+//            }
         }
+    }
+    
+    // This provides a mockup visitor when Populate Button is pressed
+    @IBAction func populateFields(_ sender: UIButton) {
+        
+        if guestButton.isSelected {
+            if classicButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupClassic
+                dateOfBirthTF.text = mockupVisitor.birthday
+            } else if vipButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupVip
+                dateOfBirthTF.text = mockupVisitor.birthday
+            } else if freeChildButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupFreeChild
+                dateOfBirthTF.text = mockupVisitor.birthday
+            } else if seasonButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupSeason
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+            } else if seniorButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupSenior
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                dateOfBirthTF.text = mockupVisitor.birthday
+            }
+            
+        } else if employeeButton.isSelected {
+            if managerButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupManager
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if foodServicesButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupFoodService
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if rideServicesButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupRideService
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if maintenanceButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupMaintenance
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            }
+            
+        } else if contractButton.isSelected {
+            if project1001Button.isSelected {
+                let mockupVisitor = MockupGuest.mockupContractP1001
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if project1002Button.isSelected {
+                let mockupVisitor = MockupGuest.mockupContractP1002
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if project1003Button.isSelected {
+                let mockupVisitor = MockupGuest.mockupContractP1003
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if project2001Button.isSelected {
+                let mockupVisitor = MockupGuest.mockupContractP2001
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            } else if project2002Button.isSelected {
+                let mockupVisitor = MockupGuest.mockupContractP2002
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                streetAddressTF.text = mockupVisitor.streetAddress
+                cityTF.text = mockupVisitor.city
+                stateTF.text = mockupVisitor.state
+                zipCodeTF.text = mockupVisitor.zipCode
+                dateOfBirthTF.text = mockupVisitor.birthday
+                ssnTF.text = mockupVisitor.ssn
+            }
+            
+        } else if vendorButton.isSelected {
+            if acmeButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupAcmeVendor
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                dateOfBirthTF.text = mockupVisitor.birthday
+                dateOfVisitTF.text = mockupVisitor.visitingDate
+            } else  if orkinButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupOrkinVendor
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                dateOfBirthTF.text = mockupVisitor.birthday
+                dateOfVisitTF.text = mockupVisitor.visitingDate
+            } else  if fedexButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupFedexVendor
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                dateOfBirthTF.text = mockupVisitor.birthday
+                dateOfVisitTF.text = mockupVisitor.visitingDate
+            } else  if nwElectricalButton.isSelected {
+                let mockupVisitor = MockupGuest.mockupNWElectricalVendor
+                firstNameTF.text = mockupVisitor.firstName
+                lastNameTF.text = mockupVisitor.lastName
+                dateOfBirthTF.text = mockupVisitor.birthday
+                dateOfVisitTF.text = mockupVisitor.visitingDate
+            }
+        } else {
+            print("To generate data you need to select an entrant and type")
+        }
+        
     }
     
     func hideSubMenus() {
@@ -210,7 +373,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Hide/Show Buttons
     // These are the main entrant submenus
     func showGuestMenu() {
-
         guestView.isHidden = false
         employeeView.isHidden = true
         vendorView.isHidden = true
@@ -224,34 +386,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func showEmployeeMenu() {
-
         employeeView.isHidden = false
         employeeStack.isHidden = false
-        manager.isHidden = false
-        foodServices.isHidden = false
-        rideServices.isHidden = false
-        maintenance.isHidden = false
+        managerButton.isHidden = false
+        foodServicesButton.isHidden = false
+        rideServicesButton.isHidden = false
+        maintenanceButton.isHidden = false
     }
 
     func showVendorMenu() {
-
         vendorView.isHidden = false
         vendorStack.isHidden = false
-        acme.isHidden = false
-        orkin.isHidden = false
-        fedex.isHidden = false
-        nwElectrical.isHidden = false
+        acmeButton.isHidden = false
+        orkinButton.isHidden = false
+        fedexButton.isHidden = false
+        nwElectricalButton.isHidden = false
     }
     
     func showContractMenu() {
-
         projectView.isHidden = false
         projectStack.isHidden = false
-        project1001.isHidden = false
-        project1002.isHidden = false
-        project1003.isHidden = false
-        project2001.isHidden = false
-        project2002.isHidden = false
+        project1001Button.isHidden = false
+        project1002Button.isHidden = false
+        project1003Button.isHidden = false
+        project2001Button.isHidden = false
+        project2002Button.isHidden = false
    }
     
     
@@ -262,13 +421,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         vendorStack.isHidden = true
     }
     
-    // This hides all submenu buttons and input fields
+    // This hides all input fields
     func hideAllLabelsAndTextFields() {
-
-        // Hides submenu buttons
-        // hideSubMenuStacks()
-        
-        // Hides Labels and Textfields
         firstName.isHidden = true
         firstNameTF.isHidden = true
         lastName.isHidden = true
@@ -335,55 +489,80 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // These functions handle changing border color of the buttons when selected
     func resetSubMenuHighlight() {
-        classic.borderColor = UIColor.BorderColor.subMenuBorderColor
-        vip.borderColor = UIColor.BorderColor.subMenuBorderColor
-        freeChild.borderColor = UIColor.BorderColor.subMenuBorderColor
-        season.borderColor = UIColor.BorderColor.subMenuBorderColor
-        senior.borderColor = UIColor.BorderColor.subMenuBorderColor
-        manager.borderColor = UIColor.BorderColor.subMenuBorderColor
-        foodServices.borderColor = UIColor.BorderColor.subMenuBorderColor
-        rideServices.borderColor = UIColor.BorderColor.subMenuBorderColor
-        maintenance.borderColor = UIColor.BorderColor.subMenuBorderColor
-        project1001.borderColor = UIColor.BorderColor.subMenuBorderColor
-        project1002.borderColor = UIColor.BorderColor.subMenuBorderColor
-        project1003.borderColor = UIColor.BorderColor.subMenuBorderColor
-        project2001.borderColor = UIColor.BorderColor.subMenuBorderColor
-        project2002.borderColor = UIColor.BorderColor.subMenuBorderColor
-        acme.borderColor = UIColor.BorderColor.subMenuBorderColor
-        orkin.borderColor = UIColor.BorderColor.subMenuBorderColor
-        fedex.borderColor = UIColor.BorderColor.subMenuBorderColor
-        nwElectrical.borderColor = UIColor.BorderColor.subMenuBorderColor
+        classicButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        classicButton.isSelected = false
+        vipButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        vipButton.isSelected = false
+        freeChildButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        freeChildButton.isSelected = false
+        seasonButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        seasonButton.isSelected = false
+        seniorButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        seniorButton.isSelected = false
+        managerButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        managerButton.isSelected = false
+        foodServicesButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        foodServicesButton.isSelected = false
+        rideServicesButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        rideServicesButton.isSelected = false
+        maintenanceButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        maintenanceButton.isSelected = false
+        project1001Button.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project1001Button.isSelected = false
+        project1002Button.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project1002Button.isSelected = false
+        project1003Button.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project1003Button.isSelected = false
+        project2001Button.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project2001Button.isSelected = false
+        project2002Button.borderColor = UIColor.BorderColor.subMenuBorderColor
+        project2002Button.isSelected = false
+        acmeButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        acmeButton.isSelected = false
+        orkinButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        orkinButton.isSelected = false
+        fedexButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        fedexButton.isSelected = false
+        nwElectricalButton.borderColor = UIColor.BorderColor.subMenuBorderColor
+        nwElectricalButton.isSelected = false
     }
     
     func resetMainMenuHighlight() {
         guestButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        guestButton.isSelected = false
         employeeButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        employeeButton.isSelected = false
         vendorButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        vendorButton.isSelected = false
         contractButton.borderColor = UIColor.BorderColor.mainMenuBorderColor
+        contractButton.isSelected = false
     }
     
     // MARK: - Main Menu Selection
     @IBAction func mainMenuButtonManager(_ sender: UIButton) {
-        resetSubMenuHighlight()
-        resetMainMenuHighlight()
-        sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor
-
-      //  guestButton.addTarget(self, action: #selector(startHighlight), for: .touchDown)
+        resetInputFields()
+        resetSubMenuHighlight() // These set the normal border color state
+        resetMainMenuHighlight() // Thse set the normal border color state
+        sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor // This is selected border color state
         
         hideSubMenus()
         hideAllLabelsAndTextFields()
         
         switch sender {
         case guestButton:
+            guestButton.isSelected = true
             print("Guest Menu Selected")
             showGuestMenu()
         case employeeButton:
+            employeeButton.isSelected = true
             print("Employee Menu Selected")
             showEmployeeMenu()
         case vendorButton:
+            vendorButton.isSelected = true
             print("Vendor Menu Selected")
             showVendorMenu()
         case contractButton:
+            contractButton.isSelected = true
             print("Contract Employee Menu Selected")
             showContractMenu()
         default:
@@ -393,89 +572,108 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Sub Menu Selection
     @IBAction func subMenuButtonManager(_ sender: UIButton) {
-         resetSubMenuHighlight()
-         sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor
+         resetInputFields()
+         resetSubMenuHighlight() // Thse set the normal border color state
+         sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor // This is selected border color state
         
          hideAllLabelsAndTextFields()
         
         switch sender {
-        case classic:
+        case classicButton:
+            classicButton.isSelected = true
             print("Classic")
             showDateOfBirthFields()
-        case vip:
+        case vipButton:
+            vipButton.isSelected = true
             print("VIP")
             showDateOfBirthFields()
-        case freeChild:
+        case freeChildButton:
+            freeChildButton.isSelected = true
             print("Free Child")
             showDateOfBirthFields()
-        case season:
+        case seasonButton:
+            seasonButton.isSelected = true
             print("Season")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
-        case senior:
+        case seniorButton:
+            seniorButton.isSelected = true
             print("Senior")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showDateOfBirthFields()
-        case manager:
+        case managerButton:
             print("Manager")
+            managerButton.isSelected = true
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showDateOfBirthFields()
             showSocialSecurityNumber()
-        case foodServices:
+        case foodServicesButton:
+            foodServicesButton.isSelected = true
             print("Food Service")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showSocialSecurityNumber()
-        case rideServices:
+        case rideServicesButton:
+            rideServicesButton.isSelected = true
             print("Ride Service")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showSocialSecurityNumber()
-        case maintenance:
+        case maintenanceButton:
+            rideServicesButton.isSelected = true
             print("Maintenance")
             showDateOfBirthFields()
             showFirstAndLastNameFields()
             showStreetAddressStateZipFields()
             showSocialSecurityNumber()
-        case acme:
+        case acmeButton:
+            acmeButton.isSelected = true
             print("Acme")
             showDateOfBirthFields()
             showVendorFields()
-        case orkin:
+        case orkinButton:
+            orkinButton.isSelected = true
             print("Orkin")
             showDateOfBirthFields()
             showVendorFields()
-        case fedex:
+        case fedexButton:
+            fedexButton.isSelected = true
             print("Fedex")
             showDateOfBirthFields()
             showVendorFields()
-        case nwElectrical:
+        case nwElectricalButton:
+            nwElectricalButton.isSelected = true
             print("NW Electrical")
             showDateOfBirthFields()
             showVendorFields()
-        case project1001:
+        case project1001Button:
+            project1001Button.isSelected = true
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-        case project1002:
+        case project1002Button:
+            project1002Button.isSelected = true
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-        case project1003:
+        case project1003Button:
+            project1003Button.isSelected = true
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-        case project2001:
+        case project2001Button:
+            project2001Button.isSelected = true
             print("Contract Employee")
             showDateOfBirthFields()
             showContractFields()
-        case project2002:
+        case project2002Button:
+            project2002Button.isSelected = true
             showDateOfBirthFields()
             showContractFields()
         default:
@@ -484,14 +682,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func resetInputFields() {
+        firstNameTF.text = ""
+        lastNameTF.text = ""
+        dateOfBirthTF.text = ""
+        streetAddressTF.text = ""
+        zipCodeTF.text = ""
+        cityTF.text = ""
+        stateTF.text = ""
+        ssnTF.text = ""
+        dateOfVisitTF.text = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideSubMenus()
-        hideAllLabelsAndTextFields()
-        
-        // The keyboard code is copied from the storyboard app, need to update to current setup
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    
+    // MARK: - Keyboard
+    @objc func keyboardWillShow(_ notfication: Notification) {
+        UIView.animate(withDuration: 0.8) { self.view.layoutIfNeeded() }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.8) { self.view.layoutIfNeeded() }
     }
     
     // This transfers the data to the second viewController
@@ -500,33 +716,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let targetViewController = segue.destination as? SecondViewController
             
             targetViewController?.passForVisitor = pass
-            targetViewController?.visitor = entrant
+            targetViewController?.visitor = entrant // not sure if this is needed
         }
     }
-    // targetViewController?.visitor = entrant // not needed?
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    // Copied from the storyboard app, need to update to current setup
-    @objc func keyboardWillShow(_ notfication: Notification) {
-       // if let keyboardFrame = notfication.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            // let frame = keyboardFrame.cgRectValue
-            // textFieldBottomConstraint.constant = frame.size.height + 10
-            
-            UIView.animate(withDuration: 0.8) {
-                self.view.layoutIfNeeded()
-            }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        // textFieldBottomConstraintt.constant = 40
         
-        UIView.animate(withDuration: 0.8) {
-            self.view.layoutIfNeeded()
-        }
+        pass = nil // Resets pass
+        entrant = nil // Not sure if this one is needed
+        hideSubMenus()
+        hideAllLabelsAndTextFields()
+        resetInputFields() // This empties all input fields to prepare for new visitor
+        resetSubMenuHighlight() // This resets the main menu button border colors
+        resetMainMenuHighlight() // This resets the sub menu button border colors
     }
+    
+    
 }
 

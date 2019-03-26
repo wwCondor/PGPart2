@@ -25,7 +25,7 @@ extension Entrant {
     // - If age is under five
     func isEligibleForFreeEntry() throws -> Bool {
         guard let birthday = birthday else {
-            throw ChildRegistrationError.provideValidDateOfBirth
+            throw RegistrationError.missingBirthday
         }
         
         let dateFormatter = DateFormatter()
@@ -33,15 +33,15 @@ extension Entrant {
         let dateStringProvided = dateFormatter.date(from: birthday)
         
         guard let dateConverted = dateStringProvided else {
-            throw ChildRegistrationError.dateConversionFailed
+            throw RegistrationError.dateConversionFailed
         }
         
         guard let age = Calendar.current.dateComponents([.year], from: dateConverted, to: Date()).year else {
-            throw ChildRegistrationError.ageCalculationFailed
+            throw RegistrationError.ageCalculationFailed
         }
         
         if age >= 5 {
-            throw ChildRegistrationError.ageNotUnderFive
+            throw RegistrationError.ageNotUnderFive
             
         } else if age < 5 {
             return true
@@ -59,16 +59,16 @@ extension Entrant {
                 print("Child is eligible for free entrance")
                 return true
             }
-        } catch ChildRegistrationError.provideValidDateOfBirth {
+        } catch RegistrationError.missingBirthday {
             print("Please enter valid date of birth")
             return false
-        } catch ChildRegistrationError.dateConversionFailed {
+        } catch RegistrationError.dateConversionFailed {
             print("Date conversion failed")
             return false
-        } catch ChildRegistrationError.ageCalculationFailed {
+        } catch RegistrationError.ageCalculationFailed {
             print("Age calculation failed")
             return false
-        } catch ChildRegistrationError.ageNotUnderFive {
+        } catch RegistrationError.ageNotUnderFive {
             print("Age not under five")
             return false
         } catch {
@@ -82,11 +82,11 @@ extension Entrant {
 extension Entrant {
     func seniorRegistrationCheck(entrant: SeniorGuest) throws {
         if entrant.firstName == "" {
-            throw SeniorGuestRegistrationErrors.missingFirstName
+            throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
-            throw SeniorGuestRegistrationErrors.missingLastName
+            throw RegistrationError.missingLastName
         } else if entrant.birthday == "" {
-            throw SeniorGuestRegistrationErrors.missingDateOfBirth
+            throw RegistrationError.missingBirthday
         }
     }
     
@@ -95,13 +95,13 @@ extension Entrant {
             try seniorRegistrationCheck(entrant: entrant)
             print("Registration is complete")
             return true
-        } catch SeniorGuestRegistrationErrors.missingFirstName {
+        } catch RegistrationError.missingFirstName {
             print("Please enter your first name on the registration form")
             return false
-        } catch SeniorGuestRegistrationErrors.missingLastName {
+        } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch SeniorGuestRegistrationErrors.missingDateOfBirth {
+        } catch RegistrationError.missingBirthday {
             print("Please enter your date of birth on the registration form")
             return false
         } catch {
@@ -114,17 +114,17 @@ extension Entrant {
 extension Entrant {
     func seasonRegistrationCheck(entrant: SeasonGuest) throws {
         if entrant.firstName == "" {
-            throw SeasonGuestRegistrationErrors.missingFirstName
+            throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
-            throw SeasonGuestRegistrationErrors.missingLastName
+            throw RegistrationError.missingLastName
         } else if entrant.streetAddress == "" {
-            throw SeasonGuestRegistrationErrors.missingStreetAddress
+            throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
-            throw SeasonGuestRegistrationErrors.missingCity
+            throw RegistrationError.missingCity
         } else if entrant.state == "" {
-            throw SeasonGuestRegistrationErrors.missingState
+            throw RegistrationError.missingState
         } else if entrant.zipCode == "" {
-            throw SeasonGuestRegistrationErrors.missingZipcode
+            throw RegistrationError.missingZipcode
         }
     }
     
@@ -133,22 +133,22 @@ extension Entrant {
             try seasonRegistrationCheck(entrant: entrant)
             print("Registration is complete")
             return true
-        } catch SeasonGuestRegistrationErrors.missingFirstName {
+        } catch RegistrationError.missingFirstName {
             print("Please enter your first name on the registration form")
             return false
-        } catch SeasonGuestRegistrationErrors.missingLastName {
+        } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch SeasonGuestRegistrationErrors.missingStreetAddress {
+        } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
             return false
-        } catch SeasonGuestRegistrationErrors.missingCity {
+        } catch RegistrationError.missingCity {
             print("Please enter your city on the registration form")
             return false
-        } catch SeasonGuestRegistrationErrors.missingState {
+        } catch RegistrationError.missingState {
             print("Please enter your state on the registration form")
             return false
-        } catch SeasonGuestRegistrationErrors.missingZipcode {
+        } catch RegistrationError.missingZipcode {
             print("Please enter your zipCode on the registration form")
             return false
         } catch {
@@ -167,17 +167,19 @@ extension Entrant {
     // This functions throws errors when information is missing
     func employeeRegistrationCheck(entrant: Employee) throws {
         if entrant.firstName == "" {
-            throw EmployeeRegistrationError.missingFirstName
+            throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
-            throw EmployeeRegistrationError.missingLastName
+            throw RegistrationError.missingLastName
         } else if entrant.streetAddress == "" {
-            throw EmployeeRegistrationError.missingStreetAddress
+            throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
-            throw EmployeeRegistrationError.missingCity
+            throw RegistrationError.missingCity
         } else if entrant.state == "" {
-            throw EmployeeRegistrationError.missingState
+            throw RegistrationError.missingState
         } else if entrant.zipCode == "" {
-            throw EmployeeRegistrationError.missingZipcode
+            throw RegistrationError.missingZipcode
+        } else if entrant.ssn == "" {
+            throw RegistrationError.missingSocialSecurityNumber
         }
     }
     
@@ -187,23 +189,26 @@ extension Entrant {
             try employeeRegistrationCheck(entrant: entrant)
             print("Registration is complete")
             return true
-        } catch EmployeeRegistrationError.missingFirstName {
+        } catch RegistrationError.missingFirstName {
             print("Please enter your first name on the registration form")
             return false
-        } catch EmployeeRegistrationError.missingLastName {
+        } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch EmployeeRegistrationError.missingStreetAddress {
+        } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
             return false
-        } catch EmployeeRegistrationError.missingCity {
+        } catch RegistrationError.missingCity {
             print("Please enter your city on the registration form")
             return false
-        } catch EmployeeRegistrationError.missingState {
+        } catch RegistrationError.missingState {
             print("Please enter your state on the registration form")
             return false
-        } catch EmployeeRegistrationError.missingZipcode {
+        } catch RegistrationError.missingZipcode {
             print("Please enter your zipcode on the registration form")
+            return false
+        } catch RegistrationError.missingSocialSecurityNumber {
+            print("Please enter your social security number on the registration form")
             return false
         } catch {
             print("Unexpected error: \(error).")
@@ -212,10 +217,20 @@ extension Entrant {
     }
     
     func contractEmployeeRegistrationCheck(entrant: ContractEmployee) throws {
-        if entrant.socialSecurityNumber == "" {
-            throw ContractEmployeeRegistrationErrors.missingSocialSecurityNumber
-        } else if entrant.birthday == "" {
-            throw ContractEmployeeRegistrationErrors.missingDateOfBirth
+        if entrant.firstName == "" {
+            throw RegistrationError.missingFirstName
+        } else if entrant.lastName == "" {
+            throw RegistrationError.missingLastName
+        } else if entrant.streetAddress == "" {
+            throw RegistrationError.missingStreetAddress
+        } else if entrant.city == "" {
+            throw RegistrationError.missingCity
+        } else if entrant.state == "" {
+            throw RegistrationError.missingState
+        } else if entrant.zipCode == "" {
+            throw RegistrationError.missingZipcode
+        } else if entrant.ssn == "" {
+            throw RegistrationError.missingSocialSecurityNumber
         }
     }
     
@@ -225,11 +240,26 @@ extension Entrant {
             try contractEmployeeRegistrationCheck(entrant: entrant)
             print("Registration is complete")
             return true
-        } catch ContractEmployeeRegistrationErrors.missingSocialSecurityNumber {
-            print("Please enter your social security number on the registration form")
+        } catch RegistrationError.missingFirstName {
+            print("Please enter your first name on the registration form")
             return false
-        } catch ContractEmployeeRegistrationErrors.missingDateOfBirth {
-            print("Please enter your date of birth on the registration form")
+        } catch RegistrationError.missingLastName {
+            print("Please enter your last name on the registration form")
+            return false
+        } catch RegistrationError.missingStreetAddress {
+            print("Please enter your street address on the registration form")
+            return false
+        } catch RegistrationError.missingCity {
+            print("Please enter your city on the registration form")
+            return false
+        } catch RegistrationError.missingState {
+            print("Please enter your state on the registration form")
+            return false
+        } catch RegistrationError.missingZipcode {
+            print("Please enter your zipcode on the registration form")
+            return false
+        } catch RegistrationError.missingSocialSecurityNumber {
+            print("Please enter your social security number on the registration form")
             return false
         } catch {
             print("Unexpected error: \(error).")
@@ -244,10 +274,14 @@ extension Entrant {
     // MARK: - Vendor Extension
     // The following functions are only relevant to Vendor Entrants
     func vendorRegistrationCheck(entrant: Vendor) throws {
-        if entrant.birthday == "" {
-            throw VendorRegistrationErrors.missingDateOfBirth
+        if entrant.firstName == "" {
+            throw RegistrationError.missingFirstName
+        } else if entrant.lastName == "" {
+            throw RegistrationError.missingLastName
+        } else if entrant.birthday == "" {
+            throw RegistrationError.missingBirthday
         } else if entrant.visitingDate == "" {
-            throw VendorRegistrationErrors.missingDateOfVisit
+            throw RegistrationError.missingDateOfVisit
         }
     }
     
@@ -256,10 +290,16 @@ extension Entrant {
             try vendorRegistrationCheck(entrant: entrant)
             print("Registration is complete")
             return true
-        } catch VendorRegistrationErrors.missingDateOfBirth {
+        } catch RegistrationError.missingFirstName {
+            print("Please enter your first name on the registration form")
+            return false
+        } catch RegistrationError.missingLastName {
+            print("Please enter your last name on the registration form")
+            return false
+        } catch RegistrationError.missingBirthday {
             print("Please enter date of birth")
             return false
-        } catch VendorRegistrationErrors.missingDateOfVisit {
+        } catch RegistrationError.missingDateOfVisit {
             print("Please enter your date of visit")
             return false
         } catch {
@@ -267,7 +307,6 @@ extension Entrant {
             return false
         }
     }
-
 }
 
 

@@ -8,39 +8,16 @@
 
 import Foundation
 
-
-// Create class with a Pass template
-// for each property at (default)
-// override default settings for different guests
-
-// Everyone:
-// - has access to Amusement Areas
-// - can access All Ride
-
-// Handle areas:
-// - Kitchen Areas (false)
-// - Ride Control Areas (false)
-// - Maintenance Areas (false)
-// - Office Areas (false)
-
-// Handle access:
-// - Skip all ride lines (false)
-
-// Handle Discount Access:
-// - for Food
-// - for Merchandise
-
-
 // MARK: - Pass Default Settings (Classic)
 class Pass {
     let entrant: Entrant
     
-    // These are shared privileges by all Entrants
-    var accessToAmusementAreas: Bool { return true }
+    // Vendors and Contract Employees have not Ride access
     var accessAllRides: Bool { return true }
     
     // These vary for each type of Entrant
     // Area Access
+    var accessToAmusementAreas: Bool { return true }
     var accessToKitchenAreas: Bool { return false }
     var accessToRideControlAreas: Bool { return false }
     var accessToMainenanceAreas: Bool { return false }
@@ -54,6 +31,7 @@ class Pass {
     var discountOnMerchandisePercentage: Int { return 0 }
     
     // This gives each pass a name corresponding values
+    // Used to populate pass name
     var passType: String { return
         TypeOfPass.classic.rawValue
     }
@@ -63,15 +41,11 @@ class Pass {
     }
 }
 
-
-
-
 // These are the subclasses for the Pass-superclass
 // Each has its appropriate accesses and privileges overrridden
-// Might not need ClassicGuestPass, since it is default
-// MARK: - Overrides for each pass
+// MARK: - Guest Passes
 class ClassicGuestPass: Pass {
-    
+    // Has no overrides since default is Classic
 }
 
 
@@ -91,6 +65,25 @@ class FreeChildPass: Pass {
     }
 }
 
+class SeasonPass: Pass {
+    override var skipLinesForRides: Bool { return true }
+    override var discountOnFoodPercentage: Int { return 10 }
+    override var discountOnMerchandisePercentage: Int { return 20 }
+    override var passType: String { return
+        TypeOfPass.season.rawValue
+    }
+}
+
+class SeniorGuestPass: Pass {
+    override var skipLinesForRides: Bool { return true }
+    override var discountOnFoodPercentage: Int { return 10 }
+    override var discountOnMerchandisePercentage: Int { return 10 }
+    override var passType: String { return
+        TypeOfPass.senior.rawValue
+    }
+}
+
+// MARK: - Employee Passes
 class FoodServicesPass: Pass {
     override var accessToKitchenAreas: Bool { return true }
     override var discountOnFoodPercentage: Int { return 15 }
@@ -130,54 +123,94 @@ class ManagerPass: Pass {
     }
 }
 
-// MARK: - Unit 5 passes
-class SeasonPass: Pass {
-    override var skipLinesForRides: Bool { return true }
-    override var discountOnFoodPercentage: Int { return 10 }
-    override var discountOnMerchandisePercentage: Int { return 20 }
-    override var passType: String { return
-        TypeOfPass.season.rawValue
-    }
-}
-
-class SeniorGuestPass: Pass {
-    override var skipLinesForRides: Bool { return true }
-    override var discountOnFoodPercentage: Int { return 10 }
-    override var discountOnMerchandisePercentage: Int { return 10 }
-    override var passType: String { return
-        TypeOfPass.senior.rawValue
-    }
-}
-
+// MARK: -  Contract Employee Passes
 class ContractEmployeePass: Pass {
     override var accessAllRides: Bool { return false }
-    // These need to be fixed for different Project Numbers
-    // Probably with switch
-    
-    /*
-     override var accessToAmusementAreas: Bool { return true }
-     override var accessToRideControlAreas: Bool { return false }
-     override var accessToKitchenAreas: Bool { return false }
-     override var accessToMainenanceAreas: Bool { return false }
-     override var accessToOfficeAreas: Bool { return false }
-    */
-    
     override var passType: String { return
         TypeOfPass.contract.rawValue
     }
 }
 
+// Contract Employee Pass subclasses
+class ContractP1001Pass: ContractEmployeePass {
+    override var accessToAmusementAreas: Bool { return true }
+    override var accessToRideControlAreas: Bool { return true }
+    override var accessToKitchenAreas: Bool { return false }
+    override var accessToMainenanceAreas: Bool { return false }
+    override var accessToOfficeAreas: Bool { return false }
+}
 
+class ContractP1002Pass: ContractEmployeePass {
+    override var accessToAmusementAreas: Bool { return true }
+    override var accessToRideControlAreas: Bool { return true }
+    override var accessToKitchenAreas: Bool { return false }
+    override var accessToMainenanceAreas: Bool { return true }
+    override var accessToOfficeAreas: Bool { return false }
+}
+
+class ContractP1003Pass: ContractEmployeePass {
+    override var accessToAmusementAreas: Bool { return true }
+    override var accessToRideControlAreas: Bool { return true }
+    override var accessToKitchenAreas: Bool { return true }
+    override var accessToMainenanceAreas: Bool { return true }
+    override var accessToOfficeAreas: Bool { return true }
+}
+
+class ContractP2001Pass: ContractEmployeePass {
+    override var accessToAmusementAreas: Bool { return false }
+    override var accessToRideControlAreas: Bool { return false }
+    override var accessToKitchenAreas: Bool { return false }
+    override var accessToMainenanceAreas: Bool { return false }
+    override var accessToOfficeAreas: Bool { return true }
+}
+
+class ContractP2002Pass: ContractEmployeePass {
+    override var accessToAmusementAreas: Bool { return false }
+    override var accessToRideControlAreas: Bool { return false }
+    override var accessToKitchenAreas: Bool { return true }
+    override var accessToMainenanceAreas: Bool { return true }
+    override var accessToOfficeAreas: Bool { return false }
+}
+
+// MARK: - Vendor Passes
 class VendorPass: Pass {
-    // override var accessAllRides: Bool { return false }
-    
-    // These need to be fixed for different Project Numbers
-    // Prbably with switch
-    
+    override var accessAllRides: Bool { return false }
     override var passType: String { return
         TypeOfPass.vendor.rawValue
     }
 }
 
+// Vendor Pass subclasses
+class AcmeVendorPass: VendorPass {
+    override var accessToAmusementAreas: Bool { return false }
+    override var accessToRideControlAreas: Bool { return false }
+    override var accessToKitchenAreas: Bool { return true }
+    override var accessToMainenanceAreas: Bool { return false }
+    override var accessToOfficeAreas: Bool { return false }
+}
+
+class OrkinVendorPass: VendorPass {
+    override var accessToAmusementAreas: Bool { return true }
+    override var accessToRideControlAreas: Bool { return true }
+    override var accessToKitchenAreas: Bool { return true }
+    override var accessToMainenanceAreas: Bool { return false }
+    override var accessToOfficeAreas: Bool { return false }
+}
+
+class FedexVendorPass: VendorPass {
+    override var accessToAmusementAreas: Bool { return false }
+    override var accessToRideControlAreas: Bool { return false }
+    override var accessToKitchenAreas: Bool { return false }
+    override var accessToMainenanceAreas: Bool { return true }
+    override var accessToOfficeAreas: Bool { return true }
+}
+
+class NWElectricalVendorPass: VendorPass {
+    override var accessToAmusementAreas: Bool { return true }
+    override var accessToRideControlAreas: Bool { return true }
+    override var accessToKitchenAreas: Bool { return true }
+    override var accessToMainenanceAreas: Bool { return true }
+    override var accessToOfficeAreas: Bool { return true }
+}
 
 

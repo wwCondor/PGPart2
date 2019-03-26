@@ -10,15 +10,14 @@ import Foundation
 
 
 // If today is entrants' birthday this congratulates entrant when pass is swiped
-class BirthdayCheck {
+struct BirthdayCheck {
     
-    static func congratulation(pass: Pass) {
-        let date = Date()
-        let thisMonth = Calendar.current.component(.month, from: date)
-        let today = Calendar.current.component(.day, from: date)
+    static func congratulates(pass: Pass) -> Bool {
+        let currentMonth = Calendar.current.component(.month, from: Date())
+        let today = Calendar.current.component(.day, from: Date())
         
         guard let birthday = pass.entrant.birthday else {
-            return
+            return false
         }
         
         let dateFormatter = DateFormatter()
@@ -26,61 +25,38 @@ class BirthdayCheck {
         let dateStringPrivided = dateFormatter.date(from: birthday)
         
         guard let dateConverted = dateStringPrivided else {
-            return
+            return false
         }
         
-        let entrantBirthdayMonth = Calendar.current.component(.month, from: dateConverted)
-        let entrantBirthdayDay = Calendar.current.component(.day, from: dateConverted)
+        let entrantBirthmonth = Calendar.current.component(.month, from: dateConverted)
+        let entrantBirthday = Calendar.current.component(.day, from: dateConverted)
         
-        if entrantBirthdayMonth == thisMonth && entrantBirthdayDay == today {
+        if entrantBirthmonth == currentMonth && entrantBirthday == today {
             print("Happy birthday!")
+            return true
         }
-        
+        return false
     }
-    
 }
 
 // Here the generated passes are swiped for each area or privilege
 // This could go to the override directly?
 struct AreaAccesPoint {
-    
-  static func additionalAreaAccess(area: Area, company: Company, project: Project) -> Bool {
-        
-        switch area {
-        case .amusementArea: if company == .orkin || company == .nwElectrical || project == .p1001  || project == .p1002 || project == .p1003 {
-            return true
-            }
-        case .rideControlArea: if company == .orkin || company == .nwElectrical || project == .p1001 || project == .p1002 || project == .p1003 {
-            return true
-            }
-        case .kitchenArea: if company == .acme || company == .orkin || company == .nwElectrical || project == .p1003 || project == .p2002 {
-            return true
-            }
-        case .maintenanceArea: if company == .fedex || company == .nwElectrical || project == .p1002 || project == .p1003 || project == .p2002 {
-            return true
-            }
-        case .officeArea: if company == .fedex || company == .nwElectrical || project == .p1003 || project == .p2001 {
-            return true
-            }
-        }
-        return false
-    }
-    
- 
+
     static func check(pass: Pass, forCheckpoint: Area) -> Bool {
         
         // This checks if today is entrants' birthday
-        BirthdayCheck.congratulation(pass: pass)
+        // BirthdayCheck.congratulation(pass: pass)
 
-        // This is the timer for the gates
-        // If timer is != 0 pass has been used recently
-        guard TimerForGates.seconds == 0 else {
-            print("This pass has been used recently")
-            return false
-        }
+////        // This is the timer for the gates
+//        if TimerForGates.seconds != 0 {
+//            print("This pass has been used recently")
+//            throw SwipeError.fiveSecondsRule
+//        }
+////
+////        // This starts timer when pass is swiped
+//        TimerForGates.timer.fire()
         
-        // This starts timer when pass is swiped
-        TimerForGates.timer.fire()
         
         switch forCheckpoint {
         case .amusementArea: if pass.accessToAmusementAreas {
@@ -122,19 +98,24 @@ struct PrivilegeSwipe {
     static func swipe(pass: Pass, toCheck: Privilege) -> Bool {
         
         // This checks if today is entrants' birthday
-        BirthdayCheck.congratulation(pass: pass)
+        // BirthdayCheck.congratulation(pass: pass)
         
-        // This is the timer for the gates
-        // If timer is != 0 pass has been used recently
-        guard TimerForGates.seconds == 0 else {
-            print("This pass has been used recently")
-            return false
-        }
-        
-        // This starts timer when pass is swiped
-        TimerForGates.timer.fire()
+////        // This is the timer for the gates
+//        // If timer is != 0 pass has been used recently
+//        if TimerForGates.seconds != 0 {
+//            print("This pass has been used recently")
+//            throw SwipeError.fiveSecondsRule
+//        }
+////
+////        // This starts timer when pass is swiped
+//        TimerForGates.timer.fire()
         
         switch toCheck {
+        case .rideAccess: if pass.accessAllRides {
+            print("Wheeeeeeee")
+            SoundManager.playAccessGrantedSound()
+            return true
+            }
         case .skipLines: if pass.skipLinesForRides {
             print("You can skip the line")
             SoundManager.playAccessGrantedSound()
@@ -161,7 +142,9 @@ struct PrivilegeSwipe {
             return false
             }
         }
+        return false
     }
 }
+
 
 

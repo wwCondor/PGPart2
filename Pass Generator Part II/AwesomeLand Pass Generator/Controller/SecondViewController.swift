@@ -33,15 +33,21 @@ class SecondViewController: UIViewController {
     // This is the imageView that holds the Company logo
     // Otherwise set to .white
     @IBOutlet weak var companyLogo: UIImageView!
+    @IBOutlet weak var passView: UIView!
     
-    @IBOutlet weak var amusementAccessTest: UIButton!
+    // These are the area/privilege test buttons
+    @IBOutlet weak var rideAccesTest: UIButton!
     @IBOutlet weak var skipLinesTest: UIButton!
     @IBOutlet weak var foodDiscountTest: UIButton!
+    
+    @IBOutlet weak var amusementAccessTest: UIButton!
+    @IBOutlet weak var officeAccessTest: UIButton!
     @IBOutlet weak var merchDiscountTest: UIButton!
+    
     @IBOutlet weak var kitchenAccessTest: UIButton!
     @IBOutlet weak var rideControlAccessTest: UIButton!
     @IBOutlet weak var maintenanceAccessTest: UIButton!
-    @IBOutlet weak var officeAccessTest: UIButton!
+    
     
     @IBOutlet weak var testResultView: UIView! // Is this being used?
     @IBOutlet weak var testResultLabel: UILabel!
@@ -50,22 +56,113 @@ class SecondViewController: UIViewController {
     
     func testSuccess() {
         testFlag.backgroundColor = UIColor.SwipeResultColor.accessGrantedColor
+        testFlag.borderColor = UIColor.SwipeResultColor.alteredStateBorderColor
         SoundManager.playAccessGrantedSound()
+        
+        // This animates color back to original state
+        UIView.animate(withDuration: 4.0, delay: 1.0, options: [.curveEaseOut], animations: {
+            self.testFlag.backgroundColor = UIColor.SwipeResultColor.normalColor
+            self.testFlag.borderColor = UIColor.SwipeResultColor.normalStateBorderColor
+        }, completion: nil)
     }
     
     func testFailed() {
         testFlag.backgroundColor = UIColor.SwipeResultColor.accessDeniedColor
+        testFlag.borderColor = UIColor.SwipeResultColor.alteredStateBorderColor
         SoundManager.PlayAccessDeniedSound()
+        
+        // This shakes the label when test fails
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: testFlag.center.x - 5, y: testFlag.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: testFlag.center.x + 5, y: testFlag.center.y))
+        testFlag.layer.add(animation, forKey: "position")
+        
+        // This animates color back to original state
+        UIView.animate(withDuration: 4.0, delay: 1.0, options: [.curveEaseOut], animations: {
+            self.testFlag.backgroundColor = UIColor.SwipeResultColor.normalColor
+            self.testFlag.borderColor = UIColor.SwipeResultColor.normalStateBorderColor
+        }, completion: nil)
     }
     
-    // Permission to enter area is checked here
-    // If access granted "testFlag" should turn green
-    // If access denied "testFlag" should turn red
+    func resetTestButtonBorderColor() {
+        rideAccesTest.borderColor = UIColor.SwipeResultColor.normalColor
+        skipLinesTest.borderColor = UIColor.SwipeResultColor.normalColor
+        foodDiscountTest.borderColor = UIColor.SwipeResultColor.normalColor
+        
+        amusementAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
+        officeAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
+        merchDiscountTest.borderColor = UIColor.SwipeResultColor.normalColor
+        
+        kitchenAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
+        rideControlAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
+        maintenanceAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
+    }
+    
+    func swipeAlert(description: String) {
+        
+        let alert = UIAlertController(title: "You shall not Pass", message: description, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Confirm", style: .default) {
+            (action) in alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func birthdayAlert(description: String) {
+        
+        let alert = UIAlertController(title: "Happy Birthday!", message: description, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Confirm", style: .default) {
+            (action) in alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // Permission for area/privilege is checked here
+    // If access granted "testFlag" turns green
+    // If access denied "testFlag" turns red
     @IBAction func areaAccessTest(_ sender: UIButton) {
         
+        resetTestButtonBorderColor() // This sets border to normal border color
+        sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor // This is selected border color state
+        
+        // pass needs to be unwrapped before use
         guard let passForVisitor = passForVisitor else { return }
         
+        // This is the timer for the gates
+        // If timer is != 0 pass has been used recently
+        if TimerForGates.seconds != 0 {
+            print("This pass has been used recently")
+            swipeAlert(description: "This pass has been used recently, please wait 5 second before using it again")
+        }
+        
+        // This starts timer when pass is swiped
+        TimerForGates.timer.fire()
+        
+        // This checks for birthday
+        if BirthdayCheck.congratulates(pass: passForVisitor) == true {
+            // self.passView.backgroundColor = UIColor(patternImage: UIImage(named: "balloons.jpeg")!) // bit to much maybe? 
+            // self.companyLogo.isHidden = true
+            birthdayAlert(description: "Congratulations, it is your birthday! Make sure you pick up a free ice cream at the ice cream vendor")
+        }
+
+        
         switch sender {
+            
+        case rideAccesTest:
+            if PrivilegeSwipe.swipe(pass: passForVisitor, toCheck: .rideAccess) == true {
+                testSuccess()
+                testResultLabel.text = "Wheeeeeee"
+                print("Ride Access")
+            } else {
+                testFailed()
+                testResultLabel.text = "You have no ride access"
+            }
             
         case skipLinesTest:
             if PrivilegeSwipe.swipe(pass: passForVisitor, toCheck: .skipLines) == true {
@@ -98,27 +195,29 @@ class SecondViewController: UIViewController {
             }
             
         case amusementAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .amusementArea) == true {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .amusementArea) == true // ||
+//                contractEmployeeVisitor.projectNumber == .p1001 ||
+//                contractEmployeeVisitor.projectNumber == .p1002 ||
+//                contractEmployeeVisitor.projectNumber == .p1003 ||
+//                visitingVendor.company == .orkin ||
+//                visitingVendor.company == .nwElectrical
+            {
                 testSuccess()
                 testResultLabel.text = "Welcome to the fun!"
-                print("Amusement Area")
-            } else {
-                testFailed()
-                testResultLabel.text = "Access Denied"
-            }
-            
-        case kitchenAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .kitchenArea) == true {
-                testSuccess()
-                testResultLabel.text = "Welcome to the kitchens"
-                print("Kitchen Area")
+                print("Amusement Area")  
             } else {
                 testFailed()
                 testResultLabel.text = "Access Denied"
             }
             
         case rideControlAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .rideControlArea) == true {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .rideControlArea) == true // ||
+//                contractEmployeeVisitor.projectNumber == .p1001 ||
+//                contractEmployeeVisitor.projectNumber == .p1002 ||
+//                contractEmployeeVisitor.projectNumber == .p1003 ||
+//                visitingVendor.company == .orkin ||
+//                visitingVendor.company == .nwElectrical
+            {
                 testSuccess()
                 testResultLabel.text = "Welcome to ride control"
                 print("Ride Control Area")
@@ -127,8 +226,30 @@ class SecondViewController: UIViewController {
                 testResultLabel.text = "Access Denied"
             }
             
+        case kitchenAccessTest:
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .kitchenArea) == true // ||
+//            contractEmployeeVisitor.projectNumber == .p1003 ||
+//            contractEmployeeVisitor.projectNumber == .p2002 ||
+//            visitingVendor.company == .acme ||
+//            visitingVendor.company == .orkin ||
+//            visitingVendor.company == .nwElectrical
+            {
+                testSuccess()
+                testResultLabel.text = "Welcome to the kitchens"
+                print("Kitchen Area")
+            } else {
+                testFailed()
+                testResultLabel.text = "Access Denied"
+            }
+            
         case maintenanceAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .maintenanceArea) == true {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .maintenanceArea) == true // ||
+//                contractEmployeeVisitor.projectNumber == .p1002 ||
+//                contractEmployeeVisitor.projectNumber == .p1003 ||
+//                contractEmployeeVisitor.projectNumber == .p2002 ||
+//                visitingVendor.company == .fedex ||
+//                visitingVendor.company == .nwElectrical
+            {
                 testSuccess()
                 testResultLabel.text = "Welcome to maintenance"
                 print("Maintenance Area")
@@ -138,7 +259,13 @@ class SecondViewController: UIViewController {
             }
             
         case officeAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .officeArea) == true {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .officeArea) == true // ||
+//                contractEmployeeVisitor.projectNumber == .p1003 ||
+//                contractEmployeeVisitor.projectNumber == .p2002 ||
+//                contractEmployeeVisitor.projectNumber == .p1003 ||
+//                visitingVendor.company == .fedex ||
+//                visitingVendor.company == .nwElectrical
+            {
                 testSuccess()
                 testResultLabel.text = "Welcome to maintenance"
                 print("Office Area")
@@ -159,6 +286,7 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         setupPassView()
         
+        
     }
     
     // Each label of the pass should get filled with entrant's information
@@ -176,113 +304,77 @@ class SecondViewController: UIViewController {
         dobLabel.text = ""
         companyLogo.image = nil
         
-        // Depending on kind of pass, some extra info will be displayed on pass
-        // "guard let pass" probably not neccessary here
+        // Depending on kind of pass, extra info will be displayed
         switch passForVisitor {
         case is ClassicGuestPass:
 //            guard let pass = passForVisitor as? ClassicGuestPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Guest else { return }
+//            guard let entrant = visitor as? ContractEmployee else { return }
             typeOfPassLabel.text = TypeOfPass.classic.rawValue
-            dobLabel.text = entrant.birthday
+            dobLabel.text = visitor.birthday
             
         case is VIPPass:
-//            guard let pass = passForVisitor as? VIPPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Guest else { return }
             typeOfPassLabel.text = TypeOfPass.vip.rawValue
-            dobLabel.text = entrant.birthday
-
+            dobLabel.text = visitor.birthday
 
         case is FreeChildPass:
-//            guard let pass = passForVisitor as? FreeChildPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Guest else { return }
             typeOfPassLabel.text = TypeOfPass.freeChild.rawValue
-            dobLabel.text = entrant.birthday
+            dobLabel.text = visitor.birthday
 
         case is SeniorGuestPass:
-//            guard let pass = passForVisitor as? SeniorGuestPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? SeniorGuest else { return }
             typeOfPassLabel.text = TypeOfPass.senior.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            dobLabel.text = visitor.birthday
 
         case is SeasonPass:
-//            guard let pass = passForVisitor as? SeasonPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? SeasonGuest else { return}
             typeOfPassLabel.text = TypeOfPass.season.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            dobLabel.text = visitor.birthday
 
         case is FoodServicesPass:
-//            guard let pass = passForVisitor as? FoodServicesPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Employee else { return }
             typeOfPassLabel.text = TypeOfPass.foodService.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            dobLabel.text = visitor.birthday
 
         case is RideServicesPass:
-//            guard let pass = passForVisitor as? RideServicesPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Employee else { return }
             typeOfPassLabel.text = TypeOfPass.rideService.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            dobLabel.text = visitor.birthday
 
         case is MaintenancePass:
-//            guard let pass = passForVisitor as? MaintenancePass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Employee else { return }
             typeOfPassLabel.text = TypeOfPass.maintenance.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            dobLabel.text = visitor.birthday
 
         case is ManagerPass:
-//            guard let pass = passForVisitor as? ManagerPass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
+            guard let visitor = passForVisitor.entrant as? Employee else { return }
             typeOfPassLabel.text = TypeOfPass.manager.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            dobLabel.text = visitor.birthday
 
         case is ContractEmployeePass:
-//            guard let pass = passForVisitor as? ContractEmployeePass else { return }
-            guard let entrant = visitor as? ContractEmployee else { return }
-            typeOfPassLabel.text = TypeOfPass.contract.rawValue
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-            dobLabel.text = entrant.birthday
+            guard let visitor = passForVisitor.entrant as? ContractEmployee else { return }
 
-            // Depending on which prroject, label needs to change
-            let project = entrant.projectNumber
-            switch project {
-            case .p1001: projectOrCompanyLabel.text = project.rawValue
-            case .p1002: projectOrCompanyLabel.text = project.rawValue
-            case .p1003: projectOrCompanyLabel.text = project.rawValue
-            case .p2001: projectOrCompanyLabel.text = project.rawValue
-            case .p2002: projectOrCompanyLabel.text = project.rawValue
-            }
-            
-            //case .p2002: projectOrCompanyLabel.text = "\(Project.p2002.rawValue)"
+            typeOfPassLabel.text = "\(TypeOfPass.contract.rawValue)"
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            projectOrCompanyLabel.text = visitor.projectNumber.rawValue
+            dobLabel.text = visitor.birthday
             
         case is VendorPass:
-//            guard let pass = passForVisitor as? VendorPass else { return }
-            guard let entrant = visitor as? Vendor else { return }
+            guard let visitor = passForVisitor.entrant as? Vendor else { return }
             
             typeOfPassLabel.text = "\(TypeOfPass.vendor.rawValue)"
-            nameLabel.text = "\(entrant.firstName) \(entrant.lastName)"
-
-            // Depending which company, label and logo need to change
-            let company = entrant.company
-            switch company {
-            case .acme:
-                projectOrCompanyLabel.text = company.rawValue
-                companyLogo.image = UIImage(imageLiteralResourceName: "AcmeLogo")
-            case .orkin:
-                projectOrCompanyLabel.text = company.rawValue
-                companyLogo.image = UIImage(imageLiteralResourceName: "OrkinLogo")
-            case .fedex:
-                projectOrCompanyLabel.text = company.rawValue
-                companyLogo.image = UIImage(imageLiteralResourceName: "FedExLogo")
-            case .nwElectrical:
-                projectOrCompanyLabel.text = company.rawValue
-                companyLogo.image = UIImage(imageLiteralResourceName: "NWELogo")
-            }
-            // projectOrCompanyLabel.text = "\(Company.orkin.rawValue)"
+            nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
+            projectOrCompanyLabel.text = visitor.company.rawValue
+            companyLogo.image = visitor.company.logo
+            dobLabel.text = visitor.birthday
             
         default:
             break

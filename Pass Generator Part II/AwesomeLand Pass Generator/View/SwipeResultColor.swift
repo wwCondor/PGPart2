@@ -11,8 +11,10 @@ import UIKit
 
 extension UIColor {
     struct SwipeResultColor {
-        static var normalColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        static var accessDeniedColor: UIColor = UIColor(red: 117/255, green: 141/255, blue: 226/255, alpha: 1)
-        static var accessGrantedColor: UIColor = UIColor(red: 245/255, green: 66/255, blue: 62/255, alpha: 1.0)
+        static var normalColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1) // White
+        static var accessDeniedColor: UIColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1.0) // Red
+        static var accessGrantedColor: UIColor = UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: 1.0) // Green
+        static var alteredStateBorderColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1) // White
+        static var normalStateBorderColor: UIColor = UIColor(red: 8/255, green: 36/255, blue: 78/255, alpha: 1) // Dark blue
     }
 }

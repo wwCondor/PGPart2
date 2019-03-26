@@ -16,7 +16,7 @@
 		0B02A2CD221BEB4E00B39CEB /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2CC221BEB4E00B39CEB /* SoundManager.swift */; };
 		0B02A2CF221BEB7700B39CEB /* ParkEntrances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2CE221BEB7700B39CEB /* ParkEntrances.swift */; };
 		0B02A2D1221BEB8E00B39CEB /* Passes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D0221BEB8E00B39CEB /* Passes.swift */; };
-		0B02A2D3221BEB9C00B39CEB /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D2221BEB9C00B39CEB /* ErrorTypes.swift */; };
+		0B02A2D3221BEB9C00B39CEB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D2221BEB9C00B39CEB /* Errors.swift */; };
 		0B02A2D5221BEBAF00B39CEB /* Swipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D4221BEBAF00B39CEB /* Swipes.swift */; };
 		0B02A2D9221BEBCA00B39CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2D8221BEBCA00B39CEB /* Protocols.swift */; };
 		0B02A2DB221BEBF000B39CEB /* TimerForGates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2DA221BEBF000B39CEB /* TimerForGates.swift */; };
@@ -26,13 +26,12 @@
 		0B02A2E6222C019000B39CEB /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02A2E5222C019000B39CEB /* ButtonDesign.swift */; };
 		0B22FC38223682320074A893 /* PassTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22FC37223682320074A893 /* PassTypes.swift */; };
 		0B3575F22236615B008DC537 /* EntrantTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3575F12236615B008DC537 /* EntrantTypes.swift */; };
-		0B3575F52236620E008DC537 /* AreaAndPrivilegeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3575F42236620E008DC537 /* AreaAndPrivilegeTypes.swift */; };
+		0B3575F52236620E008DC537 /* PrivilegesAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3575F42236620E008DC537 /* PrivilegesAccess.swift */; };
 		0B76AA052237A9D7008FC0EF /* ViewDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76AA042237A9D7008FC0EF /* ViewDesign.swift */; };
-		0B76AA072237B027008FC0EF /* Scraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76AA062237B027008FC0EF /* Scraps.swift */; };
-		0B76AA092237C028008FC0EF /* OldTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B76AA082237C028008FC0EF /* OldTestCases.swift */; };
-		0BBACD56222D4C8500F07685 /* InputChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBACD55222D4C8500F07685 /* InputChecker.swift */; };
+		0BBACD56222D4C8500F07685 /* MockupGuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBACD55222D4C8500F07685 /* MockupGuest.swift */; };
 		0BCFC8D22244FF4600378AC8 /* ButtonBorderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */; };
 		0BCFC8D42245760200378AC8 /* SwipeResultColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */; };
+		0BCFC8D8224A361000378AC8 /* CodeScraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFC8D7224A361000378AC8 /* CodeScraps.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +46,7 @@
 		0B02A2CC221BEB4E00B39CEB /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		0B02A2CE221BEB7700B39CEB /* ParkEntrances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkEntrances.swift; sourceTree = "<group>"; };
 		0B02A2D0221BEB8E00B39CEB /* Passes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passes.swift; sourceTree = "<group>"; };
-		0B02A2D2221BEB9C00B39CEB /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
+		0B02A2D2221BEB9C00B39CEB /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		0B02A2D4221BEBAF00B39CEB /* Swipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipes.swift; sourceTree = "<group>"; };
 		0B02A2D8221BEBCA00B39CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		0B02A2DA221BEBF000B39CEB /* TimerForGates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForGates.swift; sourceTree = "<group>"; };
@@ -57,13 +56,12 @@
 		0B02A2E5222C019000B39CEB /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		0B22FC37223682320074A893 /* PassTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassTypes.swift; sourceTree = "<group>"; };
 		0B3575F12236615B008DC537 /* EntrantTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrantTypes.swift; sourceTree = "<group>"; };
-		0B3575F42236620E008DC537 /* AreaAndPrivilegeTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaAndPrivilegeTypes.swift; sourceTree = "<group>"; };
+		0B3575F42236620E008DC537 /* PrivilegesAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivilegesAccess.swift; sourceTree = "<group>"; };
 		0B76AA042237A9D7008FC0EF /* ViewDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDesign.swift; sourceTree = "<group>"; };
-		0B76AA062237B027008FC0EF /* Scraps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scraps.swift; sourceTree = "<group>"; };
-		0B76AA082237C028008FC0EF /* OldTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldTestCases.swift; sourceTree = "<group>"; };
-		0BBACD55222D4C8500F07685 /* InputChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChecker.swift; sourceTree = "<group>"; };
+		0BBACD55222D4C8500F07685 /* MockupGuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupGuest.swift; sourceTree = "<group>"; };
 		0BCFC8D12244FF4600378AC8 /* ButtonBorderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBorderColor.swift; sourceTree = "<group>"; };
 		0BCFC8D32245760200378AC8 /* SwipeResultColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeResultColor.swift; sourceTree = "<group>"; };
+		0BCFC8D7224A361000378AC8 /* CodeScraps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeScraps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +100,8 @@
 				0B02A2CB221BEB3600B39CEB /* Sound */,
 				0B02A2CA221BEB2B00B39CEB /* Timer */,
 				0B02A2C0221BEACB00B39CEB /* Info.plist */,
-				0B76AA062237B027008FC0EF /* Scraps.swift */,
-				0B76AA082237C028008FC0EF /* OldTestCases.swift */,
 				0B02A2BB221BEACB00B39CEB /* Assets.xcassets */,
+				0BCFC8D7224A361000378AC8 /* CodeScraps.swift */,
 			);
 			path = "AwesomeLand Pass Generator";
 			sourceTree = "<group>";
@@ -117,7 +114,7 @@
 				0B02A2D0221BEB8E00B39CEB /* Passes.swift */,
 				0B02A2D4221BEBAF00B39CEB /* Swipes.swift */,
 				0B02A2D8221BEBCA00B39CEB /* Protocols.swift */,
-				0BBACD55222D4C8500F07685 /* InputChecker.swift */,
+				0BBACD55222D4C8500F07685 /* MockupGuest.swift */,
 				0B3575F32236617A008DC537 /* Enums */,
 			);
 			path = Models;
@@ -168,8 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				0B3575F12236615B008DC537 /* EntrantTypes.swift */,
-				0B02A2D2221BEB9C00B39CEB /* ErrorTypes.swift */,
-				0B3575F42236620E008DC537 /* AreaAndPrivilegeTypes.swift */,
+				0B02A2D2221BEB9C00B39CEB /* Errors.swift */,
+				0B3575F42236620E008DC537 /* PrivilegesAccess.swift */,
 				0B22FC37223682320074A893 /* PassTypes.swift */,
 			);
 			path = Enums;
@@ -250,9 +247,7 @@
 			files = (
 				0B02A2E42229911A00B39CEB /* SecondViewController.swift in Sources */,
 				0B02A2DB221BEBF000B39CEB /* TimerForGates.swift in Sources */,
-				0B76AA092237C028008FC0EF /* OldTestCases.swift in Sources */,
 				0B02A2D1221BEB8E00B39CEB /* Passes.swift in Sources */,
-				0B76AA072237B027008FC0EF /* Scraps.swift in Sources */,
 				0B02A2E6222C019000B39CEB /* ButtonDesign.swift in Sources */,
 				0B3575F22236615B008DC537 /* EntrantTypes.swift in Sources */,
 				0BCFC8D22244FF4600378AC8 /* ButtonBorderColor.swift in Sources */,
@@ -262,12 +257,13 @@
 				0BCFC8D42245760200378AC8 /* SwipeResultColor.swift in Sources */,
 				0B02A2CF221BEB7700B39CEB /* ParkEntrances.swift in Sources */,
 				0B02A2D9221BEBCA00B39CEB /* Protocols.swift in Sources */,
-				0B3575F52236620E008DC537 /* AreaAndPrivilegeTypes.swift in Sources */,
+				0B3575F52236620E008DC537 /* PrivilegesAccess.swift in Sources */,
 				0B02A2CD221BEB4E00B39CEB /* SoundManager.swift in Sources */,
-				0BBACD56222D4C8500F07685 /* InputChecker.swift in Sources */,
+				0BBACD56222D4C8500F07685 /* MockupGuest.swift in Sources */,
 				0B02A2C7221BEB0900B39CEB /* Entrants.swift in Sources */,
 				0B02A2B5221BEAC900B39CEB /* AppDelegate.swift in Sources */,
-				0B02A2D3221BEB9C00B39CEB /* ErrorTypes.swift in Sources */,
+				0B02A2D3221BEB9C00B39CEB /* Errors.swift in Sources */,
+				0BCFC8D8224A361000378AC8 /* CodeScraps.swift in Sources */,
 				0B76AA052237A9D7008FC0EF /* ViewDesign.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

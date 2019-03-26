@@ -15,17 +15,13 @@ import Foundation
 // for Guests:
 protocol GuestProtocol {
     func isEligibleForFreeEntry() throws -> Bool
-    func childRegistrationComplete() -> Bool
-//    func assignPassToGuest(entrant: Guest) -> Pass?
-    
+    func childRegistrationComplete() -> Bool    
 }
 
 // for Employees:
 protocol EmployeeProtocol {
     func employeeRegistrationCheck(entrant: Employee) throws
     func employeeRegistrationComplete(entrant: Employee) -> Bool
-//    func assignPassToEmployee(entrant: Employee) -> Pass?
-    
 }
 
 // for contract Employees
@@ -34,12 +30,10 @@ protocol ContractEmployeeProtocol {
     func contractEmployeeRegistrationCheck(entrant: ContractEmployee) throws
     func employeeRegistrationComplete(entrant: Employee) -> Bool
     func contractEmployeeRegistrationComplete(entrant: ContractEmployee) -> Bool
-//    func assignPassToEmployee(entrant: Employee) -> Pass?
 }
 
 // for Vendors:
 protocol VendorEntranceProtocol {
     func vendorRegistrationCheck(entrant: Vendor) throws
     func vendorRegistrationComplete(entrant: Vendor) -> Bool
-//    func assignPassToVendor(entrant: Vendor) -> Pass?
 }
