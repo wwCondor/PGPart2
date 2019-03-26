@@ -39,24 +39,10 @@ struct BirthdayCheck {
     }
 }
 
-// Here the generated passes are swiped for each area or privilege
-// This could go to the override directly?
+// This checks if visitor has access to certain areas
 struct AreaAccesPoint {
 
     static func check(pass: Pass, forCheckpoint: Area) -> Bool {
-        
-        // This checks if today is entrants' birthday
-        // BirthdayCheck.congratulation(pass: pass)
-
-////        // This is the timer for the gates
-//        if TimerForGates.seconds != 0 {
-//            print("This pass has been used recently")
-//            throw SwipeError.fiveSecondsRule
-//        }
-////
-////        // This starts timer when pass is swiped
-//        TimerForGates.timer.fire()
-        
         
         switch forCheckpoint {
         case .amusementArea: if pass.accessToAmusementAreas {
@@ -92,23 +78,10 @@ struct AreaAccesPoint {
     }
 }
 
-
+// This checks whether or not a visitor has certain privileges
 struct PrivilegeSwipe {
     
     static func swipe(pass: Pass, toCheck: Privilege) -> Bool {
-        
-        // This checks if today is entrants' birthday
-        // BirthdayCheck.congratulation(pass: pass)
-        
-////        // This is the timer for the gates
-//        // If timer is != 0 pass has been used recently
-//        if TimerForGates.seconds != 0 {
-//            print("This pass has been used recently")
-//            throw SwipeError.fiveSecondsRule
-//        }
-////
-////        // This starts timer when pass is swiped
-//        TimerForGates.timer.fire()
         
         switch toCheck {
         case .rideAccess: if pass.accessAllRides {

@@ -147,23 +147,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if project1001Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p1001
-                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+                entrant = ContractEmployee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, projectNumber: project, birthday: birthday)
             } else if project1002Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p1002
-                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+                entrant = ContractEmployee( type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, projectNumber: project, birthday: birthday)
             } else if project1003Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p1003
-                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+                entrant = ContractEmployee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, projectNumber: project, birthday: birthday)
             } else if project2001Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p2001
-                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+                entrant = ContractEmployee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, projectNumber: project, birthday: birthday)
             } else if project2002Button.isSelected {
                 let type = EmployeeType.contract
                 let project = Project.p2002
-                entrant = ContractEmployee(projectNumber: project, type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+                entrant = ContractEmployee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, projectNumber: project, birthday: birthday)
             }
         
         // These are the vendorButton inits
@@ -183,24 +183,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-//        let childSucces = entrant?.childRegistrationComplete()
-//        let seasonSucces = entrant?.seasonRegistrationComplete(entrant: entrant) as? SeasonGuest
-        // If entrant has been created, a pass can be created as well.
+        
         // MARK: - SEGUE
-        // if entrant = entrant && if either of the registrations is complete sgue may perform
+        // if entrant = entrant && if either of the registrations is complete segue may perform
         // Add registration complete condition
         if let entrant = entrant {
-//            let succesChild = entrant.childRegistrationComplete()
-//            let eployeeSucces = entrant.employeeRegistrationComplete(entrant: entrant) ||
-//                entrant.seasonRegistrationComplete(entrant: entrant)  ||
-//                entrant.seniorRegistrationComplete(entrant: entrant)  ||
-//                entrant.vendorRegistrationComplete(entrant: entrant) == true
-//            {
             pass = entrant.assignPass(entrant: entrant)
+            if pass != nil {
             performSegue(withIdentifier: "PassSegue", sender: self)
-//            }
+            }
         }
     }
+    
+//    func registrationAlert(description: String) {
+//
+//        let alert = UIAlertController(title: "Registration Error", message: description, preferredStyle: .alert)
+//        let confirm = UIAlertAction(title: "Confirm", style: .default) {
+//            (action) in alert.dismiss(animated: true, completion: nil)
+//        }
+//
+//        alert.addAction(confirm)
+//        present(alert, animated: true, completion: nil)
+//    }
     
     // This provides a mockup visitor when Populate Button is pressed
     @IBAction func populateFields(_ sender: UIButton) {

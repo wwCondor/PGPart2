@@ -157,7 +157,7 @@ class Entrant {
     }
 }
 
-class Guest: Entrant, GuestProtocol { // Guest need to conform Guest protocol
+class Guest: Entrant { // }, GuestProtocol { // Guest need to conform Guest protocol
     var type: GuestType
     
     init(type: GuestType, birthday: String?) {
@@ -170,13 +170,14 @@ class Guest: Entrant, GuestProtocol { // Guest need to conform Guest protocol
 
 // Season and Senior guest are both subclasses of Guest
 // Each requires more information input that the other guests
-class SeasonGuest: Guest {
+class SeasonGuest: Entrant {
     var firstName: String
     var lastName: String
     var streetAddress: String
     var city: String
     var state: String
     var zipCode: String
+    var type: GuestType
     
     init(firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, type: GuestType, birthday: String?) {
         self.firstName = firstName
@@ -185,25 +186,28 @@ class SeasonGuest: Guest {
         self.city = city
         self.state = state
         self.zipCode = zipCode
+        self.type = type
         
-        super.init(type: type, birthday: birthday)
+        super.init(birthday: birthday)
     }
 }
 
-class SeniorGuest: Guest {
+class SeniorGuest: Entrant {
     var firstName: String
     var lastName: String
+    var type: GuestType
     
     init(firstName: String, lastName: String, type: GuestType, birthday: String?) {
         self.firstName = firstName
         self.lastName = lastName
+        self.type = type
         
-        super.init(type: type, birthday: birthday)
+        super.init(birthday: birthday)
     }
 }
 
 // Employees need to fill in the following information
-class Employee: Entrant, EmployeeProtocol { // These need to conform Employee protocol
+class Employee: Entrant { // }, EmployeeProtocol { // These need to conform Employee protocol
     var type: EmployeeType
     var firstName: String
     var lastName: String
@@ -229,14 +233,30 @@ class Employee: Entrant, EmployeeProtocol { // These need to conform Employee pr
 }
 
 // Contract Empoyees are an Employee subclass
-class ContractEmployee: Employee {
+class ContractEmployee: Entrant {
+    var type: EmployeeType
+    var firstName: String
+    var lastName: String
+    var streetAddress: String
+    var city: String
+    var state: String
+    var zipCode: String
+    var ssn: String
     var projectNumber: Project
     
-    init(projectNumber: Project, type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, ssn: String, birthday: String?) {
+    init(type: EmployeeType, firstName: String, lastName: String, streetAddress: String, city: String, state: String, zipCode: String, ssn: String, projectNumber: Project, birthday: String?) {
         
+        self.type = type
+        self.firstName = firstName
+        self.lastName = lastName
+        self.streetAddress = streetAddress
+        self.city = city
+        self.state = state
+        self.zipCode = zipCode
+        self.ssn = ssn
         self.projectNumber = projectNumber
         
-        super.init(type: type, firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
+        super.init(birthday: birthday)
     }
 }
 

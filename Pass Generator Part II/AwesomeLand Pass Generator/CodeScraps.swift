@@ -63,9 +63,7 @@ extension Entrant {
     func checkAge(birthday: String?) -> Int? {
         
         guard let dateConverted = convert(birthday: birthday) else { return nil }
-        guard let age = Calendar.current.dateComponents([.year], from: dateConverted, to: Date()).year else {
-            return nil
-        }
+        guard let age = Calendar.current.dateComponents([.year], from: dateConverted, to: Date()).year else { return nil }
         return age
     }
 
@@ -77,16 +75,14 @@ extension Entrant {
             dateFormatter.dateFormat = "dd-MM-yyyy"
             let dateStringProvided = dateFormatter.date(from: birthday)
             
-            guard let dateConverted = dateStringProvided else {
-                return nil
-            }
+            guard let dateConverted = dateStringProvided else { return nil }
             return dateConverted
         } else {
             return nil
         }
     }
 
-    func checkEntrantInformation() throws -> Bool {
+    func entrantInformationComplete() throws -> Bool {
 
         switch self {
         case let guest as Guest:
@@ -189,3 +185,40 @@ extension Entrant {
         return false
     }
 }
+
+// MARK: - Attempt Solving Void passes
+//        guard let entrant = entrant else { return }
+//
+//        do {
+//            let succes = try entrant.entrantInformationComplete()
+//
+//            if succes != false {
+//                performSegue(withIdentifier: "PassSegue", sender: self)
+//            }
+//        } catch RegistrationError.ageCalculationFailed {
+//            registrationAlert(description: "Age could not be calculated")
+//        } catch RegistrationError.ageNotUnderFive {
+//            registrationAlert(description: "Age not under five")
+//        } catch RegistrationError.dateConversionFailed {
+//            registrationAlert(description: "Date conversion failed")
+//        } catch RegistrationError.missingBirthday {
+//            registrationAlert(description: "Date of birth missing from registration form")
+//        } catch RegistrationError.missingFirstName {
+//            registrationAlert(description: "First name missing from registration form")
+//        } catch RegistrationError.missingLastName {
+//            registrationAlert(description: "Last name missing from registration form")
+//        } catch RegistrationError.missingStreetAddress {
+//            registrationAlert(description: "Street missing from registration form")
+//        } catch RegistrationError.missingCity {
+//            registrationAlert(description: "City missing from registration form")
+//        } catch RegistrationError.missingState {
+//            registrationAlert(description: "State missing from registration form")
+//        } catch RegistrationError.missingZipcode {
+//            registrationAlert(description: "Zipcode missing from registration form")
+//        } catch RegistrationError.missingSocialSecurityNumber {
+//            registrationAlert(description: "Social security number missing from registration form")
+//        } catch RegistrationError.missingDateOfVisit {
+//            registrationAlert(description: "Date of visit missing from registration form")
+//        } catch let error {
+//            print("\(error)")
+//        }

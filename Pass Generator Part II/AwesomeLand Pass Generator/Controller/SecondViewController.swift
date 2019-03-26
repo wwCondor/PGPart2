@@ -147,11 +147,9 @@ class SecondViewController: UIViewController {
         // This checks for birthday
         if BirthdayCheck.congratulates(pass: passForVisitor) == true {
             // self.passView.backgroundColor = UIColor(patternImage: UIImage(named: "balloons.jpeg")!) // bit to much maybe? 
-            // self.companyLogo.isHidden = true
             birthdayAlert(description: "Congratulations, it is your birthday! Make sure you pick up a free ice cream at the ice cream vendor")
         }
 
-        
         switch sender {
             
         case rideAccesTest:
@@ -195,13 +193,7 @@ class SecondViewController: UIViewController {
             }
             
         case amusementAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .amusementArea) == true // ||
-//                contractEmployeeVisitor.projectNumber == .p1001 ||
-//                contractEmployeeVisitor.projectNumber == .p1002 ||
-//                contractEmployeeVisitor.projectNumber == .p1003 ||
-//                visitingVendor.company == .orkin ||
-//                visitingVendor.company == .nwElectrical
-            {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .amusementArea) == true {
                 testSuccess()
                 testResultLabel.text = "Welcome to the fun!"
                 print("Amusement Area")  
@@ -211,13 +203,7 @@ class SecondViewController: UIViewController {
             }
             
         case rideControlAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .rideControlArea) == true // ||
-//                contractEmployeeVisitor.projectNumber == .p1001 ||
-//                contractEmployeeVisitor.projectNumber == .p1002 ||
-//                contractEmployeeVisitor.projectNumber == .p1003 ||
-//                visitingVendor.company == .orkin ||
-//                visitingVendor.company == .nwElectrical
-            {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .rideControlArea) == true {
                 testSuccess()
                 testResultLabel.text = "Welcome to ride control"
                 print("Ride Control Area")
@@ -227,13 +213,7 @@ class SecondViewController: UIViewController {
             }
             
         case kitchenAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .kitchenArea) == true // ||
-//            contractEmployeeVisitor.projectNumber == .p1003 ||
-//            contractEmployeeVisitor.projectNumber == .p2002 ||
-//            visitingVendor.company == .acme ||
-//            visitingVendor.company == .orkin ||
-//            visitingVendor.company == .nwElectrical
-            {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .kitchenArea) == true {
                 testSuccess()
                 testResultLabel.text = "Welcome to the kitchens"
                 print("Kitchen Area")
@@ -243,13 +223,7 @@ class SecondViewController: UIViewController {
             }
             
         case maintenanceAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .maintenanceArea) == true // ||
-//                contractEmployeeVisitor.projectNumber == .p1002 ||
-//                contractEmployeeVisitor.projectNumber == .p1003 ||
-//                contractEmployeeVisitor.projectNumber == .p2002 ||
-//                visitingVendor.company == .fedex ||
-//                visitingVendor.company == .nwElectrical
-            {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .maintenanceArea) == true {
                 testSuccess()
                 testResultLabel.text = "Welcome to maintenance"
                 print("Maintenance Area")
@@ -259,13 +233,7 @@ class SecondViewController: UIViewController {
             }
             
         case officeAccessTest:
-            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .officeArea) == true // ||
-//                contractEmployeeVisitor.projectNumber == .p1003 ||
-//                contractEmployeeVisitor.projectNumber == .p2002 ||
-//                contractEmployeeVisitor.projectNumber == .p1003 ||
-//                visitingVendor.company == .fedex ||
-//                visitingVendor.company == .nwElectrical
-            {
+            if AreaAccesPoint.check(pass: passForVisitor, forCheckpoint: .officeArea) == true {
                 testSuccess()
                 testResultLabel.text = "Welcome to maintenance"
                 print("Office Area")
@@ -361,16 +329,14 @@ class SecondViewController: UIViewController {
 
         case is ContractEmployeePass:
             guard let visitor = passForVisitor.entrant as? ContractEmployee else { return }
-
-            typeOfPassLabel.text = "\(TypeOfPass.contract.rawValue)"
+            typeOfPassLabel.text = TypeOfPass.contract.rawValue
             nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
             projectOrCompanyLabel.text = visitor.projectNumber.rawValue
             dobLabel.text = visitor.birthday
             
         case is VendorPass:
             guard let visitor = passForVisitor.entrant as? Vendor else { return }
-            
-            typeOfPassLabel.text = "\(TypeOfPass.vendor.rawValue)"
+            typeOfPassLabel.text = TypeOfPass.vendor.rawValue
             nameLabel.text = "\(visitor.firstName) \(visitor.lastName)"
             projectOrCompanyLabel.text = visitor.company.rawValue
             companyLogo.image = visitor.company.logo

@@ -41,7 +41,7 @@ enum Company: String {
     case acme = "Acme"
     case orkin = "Orkin"
     case fedex = "Fedex"
-    case nwElectrical = "NWElectrical"
+    case nwElectrical = "NW Electrical"
 }
 
 // Here for better overview:
