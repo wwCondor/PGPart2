@@ -5,7 +5,7 @@
 //  Created by Wouter Willebrands on 13/02/2019.
 //  Copyright © 2019 Studio Willebrands. All rights reserved.
 //
-
+import UIKit
 import Foundation
 
 // At the park entrance/ticket office all Entrants go through a registration procedure
@@ -18,28 +18,26 @@ import Foundation
 // The following functions are only relevant to guest entrants
 extension Entrant {
     
-    // This checks:
-    // - If there is a birthday entered
-    // - If date can be converted
-    // - If age can be calculated from birthday
-    // - If age is under five
     func isEligibleForFreeEntry() throws -> Bool {
+//      let errorShown = ViewController.errorAlert(description: LocalizedError)
+//
+        // This checks whether there is a birthday
         guard let birthday = birthday else {
             throw RegistrationError.missingBirthday
         }
-        
+        // If provided birthday needs to be converted
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let dateStringProvided = dateFormatter.date(from: birthday)
-        
+        // If date can be converted we can continuue
         guard let dateConverted = dateStringProvided else {
             throw RegistrationError.dateConversionFailed
         }
-        
+        // If we have a convertable date we can calculate age
         guard let age = Calendar.current.dateComponents([.year], from: dateConverted, to: Date()).year else {
             throw RegistrationError.ageCalculationFailed
         }
-        
+        // This checks if age is under 5
         if age >= 5 {
             throw RegistrationError.ageNotUnderFive
             
@@ -48,19 +46,19 @@ extension Entrant {
         }
         return false
     }
-    
-    // registration for child is complete when age is provided
-    // AND when age is under 5 years
-    // else returns error
+        
+    // Child registration errors are caught here
     // errors are caught here
     func childRegistrationComplete() -> Bool {
+    // func childRegistrationComplete(acceptsViewController ViewController: UIViewController) -> Bool {
+    // I tried to active alert message from within this extension to the VC
         do {
             if try isEligibleForFreeEntry() {
                 print("Child is eligible for free entrance")
                 return true
             }
         } catch RegistrationError.missingBirthday {
-            print("Please enter valid date of birth")
+            print("Please provide a birthday")
             return false
         } catch RegistrationError.dateConversionFailed {
             print("Date conversion failed")
@@ -69,6 +67,8 @@ extension Entrant {
             print("Age calculation failed")
             return false
         } catch RegistrationError.ageNotUnderFive {
+        // present(using: ViewController, errorDescription: RegistrationError.ageNotUnderFive.localizedDescription, animated: true)
+        // From attempt described above
             print("Age not under five")
             return false
         } catch {
@@ -77,39 +77,37 @@ extension Entrant {
         }
         return false
     }
-}
 
-extension Entrant {
+
+
     func seniorRegistrationCheck(entrant: SeniorGuest) throws {
         if entrant.firstName == "" {
             throw RegistrationError.missingFirstName
-        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
-            throw RegistrationError.lenghtName
-        } else if entrant.lastName == "" {
+        }  else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
-        }
-        
-        guard let birthday = birthday else {
-            throw RegistrationError.missingBirthday
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateStringProvided = dateFormatter.date(from: birthday)
-        
-        guard let dateConverted = dateStringProvided else {
-            throw RegistrationError.dateConversionFailed
-        }
-        
-        guard let age = Calendar.current.dateComponents([.year], from: dateConverted, to: Date()).year else {
-            throw RegistrationError.ageCalculationFailed
-        }
-        
-        if age < 65 {
-            throw RegistrationError.ageNotOverSixtyFive
-            
+        } else if entrant.birthday != "" {
+            // do someething that checks if input provided is a date
+            if let date = entrant.birthday {
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                let dateStringProvided = dateFormatter.date(from: date)
+                
+                guard let convertedDate = dateStringProvided else {
+                    print("Date not convertable")
+                    throw RegistrationError.dateConversionFailed
+                }
+                    
+                guard let age = Calendar.current.dateComponents([.year], from: convertedDate, to: Date()).year else {
+                    throw RegistrationError.ageCalculationFailed
+                }
+                
+                if age < 65 {
+                    throw RegistrationError.ageNotOverSixtyFive
+                }
+            }
         }
     }
     
@@ -124,11 +122,8 @@ extension Entrant {
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch RegistrationError.lenghtName {
-            print("First or last name may not exceed 16 characters")
-            return false
         } catch RegistrationError.missingBirthday {
-            print("Please enter your date of birth on the registration form")
+            print("Please provide a birthday")
             return false
         } catch RegistrationError.dateConversionFailed {
             print("Date conversion failed")
@@ -144,16 +139,19 @@ extension Entrant {
             return false
         }
     }
-}
 
-extension Entrant {
+
+
     func seasonRegistrationCheck(entrant: SeasonGuest) throws {
         if entrant.firstName == "" {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
-        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
-            throw RegistrationError.lenghtName
+        } else if entrant.birthday == "" {
+            throw RegistrationError.missingBirthday
+        } else if entrant.birthday?.count != 8 {
+            // do someething that checks if input provided is date
+            throw RegistrationError.dateConversionFailed
         } else if entrant.streetAddress == "" {
             throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
@@ -162,6 +160,8 @@ extension Entrant {
             throw RegistrationError.missingState
         } else if entrant.zipCode == "" {
             throw RegistrationError.missingZipcode
+        } else if entrant.zipCode.count != 6 {
+            throw RegistrationError.zipcodeLength
         }
     }
     
@@ -176,8 +176,11 @@ extension Entrant {
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch RegistrationError.lenghtName {
-            print("First or last name may not exceed 16 characters")
+        } catch RegistrationError.missingBirthday {
+            print("Please provide a birthday")
+            return false
+        } catch RegistrationError.ageCalculationFailed {
+            print("Please enter valid date of birth")
             return false
         } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
@@ -191,18 +194,21 @@ extension Entrant {
         } catch RegistrationError.missingZipcode {
             print("Please enter your zipCode on the registration form")
             return false
+        } catch RegistrationError.zipcodeLength {
+            print("Please enter your zipCode on the registration form")
+            return false
         } catch {
             print("Unexpected error: \(error).")
             return false
         }
     }
  
-}
+
 
 
 // MARK: - Employee Extension
 // The following functions are only relevant to Employee entrants
-extension Entrant {
+
     
     // This functions throws errors when information is missing
     func employeeRegistrationCheck(entrant: Employee) throws {
@@ -210,8 +216,11 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
-        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
-            throw RegistrationError.lenghtName
+        } else if entrant.birthday == "" {
+            throw RegistrationError.missingBirthday
+        } else if entrant.birthday?.count != 8 {
+            // do someething that checks if input provided is date
+            throw RegistrationError.dateConversionFailed
         } else if entrant.streetAddress == "" {
             throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
@@ -220,8 +229,12 @@ extension Entrant {
             throw RegistrationError.missingState
         } else if entrant.zipCode == "" {
             throw RegistrationError.missingZipcode
+        } else if entrant.zipCode.count != 6 {
+            throw RegistrationError.zipcodeLength
         } else if entrant.ssn == "" {
             throw RegistrationError.missingSocialSecurityNumber
+        } else if entrant.ssn.count != 9 {
+            throw RegistrationError.ssnLettersOrLenght
         }
     }
     
@@ -237,8 +250,11 @@ extension Entrant {
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch RegistrationError.lenghtName {
-            print("First or last name may not exceed 16 characters")
+        } catch RegistrationError.missingBirthday {
+            print("Please provide a birthday")
+            return false
+        } catch RegistrationError.ageCalculationFailed {
+            print("Please provide valid date of birth")
             return false
         } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
@@ -255,6 +271,9 @@ extension Entrant {
         } catch RegistrationError.missingSocialSecurityNumber {
             print("Please enter your social security number on the registration form")
             return false
+        } catch RegistrationError.ssnLettersOrLenght {
+            print("Please enter your social security number on the registration form")
+            return false
         } catch {
             print("Unexpected error: \(error).")
             return false
@@ -266,8 +285,11 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
-        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
-            throw RegistrationError.lenghtName
+        } else if entrant.birthday == "" {
+            throw RegistrationError.missingBirthday
+        } else if entrant.birthday?.count != 8 {
+            // do someething that checks if input provided is date
+            throw RegistrationError.dateConversionFailed
         } else if entrant.streetAddress == "" {
             throw RegistrationError.missingStreetAddress
         } else if entrant.city == "" {
@@ -276,8 +298,12 @@ extension Entrant {
             throw RegistrationError.missingState
         } else if entrant.zipCode == "" {
             throw RegistrationError.missingZipcode
+        } else if entrant.zipCode.count != 6 {
+            throw RegistrationError.zipcodeLength
         } else if entrant.ssn == "" {
             throw RegistrationError.missingSocialSecurityNumber
+        } else if entrant.ssn.count != 9 {
+            throw RegistrationError.ssnLettersOrLenght
         }
     }
     
@@ -293,8 +319,11 @@ extension Entrant {
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch RegistrationError.lenghtName {
-            print("First or last name may not exceed 16 characters")
+        } catch RegistrationError.missingBirthday {
+            print("Please provide a birthday")
+            return false
+        } catch RegistrationError.ageCalculationFailed {
+            print("Please provide valid date of birth")
             return false
         } catch RegistrationError.missingStreetAddress {
             print("Please enter your street address on the registration form")
@@ -311,15 +340,15 @@ extension Entrant {
         } catch RegistrationError.missingSocialSecurityNumber {
             print("Please enter your social security number on the registration form")
             return false
+        } catch RegistrationError.ssnLettersOrLenght {
+            print("Please enter your social security number on the registration form")
+            return false
         } catch {
             print("Unexpected error: \(error).")
             return false
         }
     }
-}
 
-
-extension Entrant {
     
     // MARK: - Vendor Extension
     // The following functions are only relevant to Vendor Entrants
@@ -328,12 +357,12 @@ extension Entrant {
             throw RegistrationError.missingFirstName
         } else if entrant.lastName == "" {
             throw RegistrationError.missingLastName
-        } else if entrant.firstName.count > 16 || entrant.lastName.count > 16 {
-            throw RegistrationError.lenghtName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
         } else if entrant.visitingDate == "" {
             throw RegistrationError.missingDateOfVisit
+        } else if entrant.birthday != "" {
+            // do someething that checks if input provided is date
         }
     }
     
@@ -348,8 +377,8 @@ extension Entrant {
         } catch RegistrationError.missingLastName {
             print("Please enter your last name on the registration form")
             return false
-        } catch RegistrationError.lenghtName {
-            print("First or last name may not exceed 16 characters")
+        } catch RegistrationError.ageCalculationFailed {
+            print("Please provide valid date of birth")
             return false
         } catch RegistrationError.missingBirthday {
             print("Please enter date of birth")
@@ -362,6 +391,5 @@ extension Entrant {
             return false
         }
     }
+
 }
-
-

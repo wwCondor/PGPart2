@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
-
     // These are all the textfields
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -88,9 +87,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var createPassOrPopulate: UIButton!
     
-    
     @IBOutlet weak var streetCityStateZipStack: UIStackView!
     
+//    @IBOutlet weak var datePicker: UIDatePicker!
+//    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
+//
+//        let dateFormatter = DateFormatter()
+//
+//        dateFormatter.dateStyle = DateFormatter.Style.short
+//        dateFormatter.timeStyle = DateFormatter.Style.short
+//
+//        let date = dateFormatter.string(from: datePicker.date)
+//
+//        if dateOfBirthTF.isSelected == true {
+//            dateOfBirthTF.text = date
+//        } else if dateOfVisitTF.isSelected == true {
+//            dateOfVisitTF.text = date
+//        }
+//    }
+//
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if textField == dateOfBirthTF || textField == dateOfVisitTF {
+//            datePicker.isHidden = false
+//        }
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textField == dateOfBirthTF || textField == dateOfVisitTF {
+//            datePicker.isHidden = true
+//        }
+//    }
     
     @IBAction func createPassButtonTapped(_ sender: Any) {
         
@@ -125,8 +151,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let type = GuestType.senior
                 entrant = SeniorGuest(firstName: firstName, lastName: lastName, type: type, birthday: birthday)
             }
-        
-        // These are the employeeButton inits
+            
+            // These are the employeeButton inits
         } else if employeeButton.isSelected {
             if managerButton.isSelected {
                 let type = EmployeeType.manager
@@ -141,8 +167,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let type = EmployeeType.maintenance
                 entrant = Employee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, birthday: birthday)
             }
-         
-        // These are the contractButton inits
+            
+            // These are the contractButton inits
         } else if contractButton.isSelected {
             if project1001Button.isSelected {
                 let type = EmployeeType.contract
@@ -165,8 +191,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let project = Project.p2002
                 entrant = ContractEmployee(type: type, firstName: firstName, lastName: lastName, streetAddress: street, city: city, state: state, zipCode: zipCode, ssn: ssn, projectNumber: project, birthday: birthday)
             }
-        
-        // These are the vendorButton inits
+            
+            // These are the vendorButton inits
         } else if vendorButton.isSelected {
             if acmeButton.isSelected {
                 let type = Company.acme
@@ -190,21 +216,72 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if let entrant = entrant {
             pass = entrant.assignPass(entrant: entrant)
             if pass != nil {
-            performSegue(withIdentifier: "PassSegue", sender: self)
+                performSegue(withIdentifier: "PassSegue", sender: self)
+                // If pass == nil: An alert is shown with instructions.
+            } else {
+                if guestButton.isSelected {
+                    if freeChildButton.isSelected {
+                        if dateOfBirthTF.text == "" {
+                            errorAlert(description: RegistrationError.missingBirthday.localizedDescription)
+                        } else if dateOfBirthTF.text != "" {
+                                errorAlert(description: RegistrationError.ageNotUnderFive.localizedDescription)
+                        }
+                    } else if seasonButton.isSelected {
+                        if firstNameTF.text == "" || lastNameTF.text == "" || streetAddressTF.text == "" || cityTF.text == "" ||  stateTF.text == "" || dateOfBirthTF.text == "" {
+                            errorAlert(description: RegistrationError.informationMissing.localizedDescription)
+                        } else if zipCodeTF.text?.count != 6 {
+                            errorAlert(description: RegistrationError.zipcodeLength.localizedDescription)
+                        } else if dateOfBirthTF.text != "" {
+                            errorAlert(description: RegistrationError.dateConversionFailed.localizedDescription)
+                        }
+                    } else if seniorButton.isSelected {
+                        if firstNameTF.text == "" || lastNameTF.text == "" || dateOfBirthTF.text == ""{
+                            errorAlert(description: RegistrationError.informationMissing.localizedDescription)
+                        } else if dateOfBirthTF.text == ""  {
+                            errorAlert(description: RegistrationError.missingBirthday.localizedDescription)
+                        } else if dateOfBirthTF.text != "" {
+                            errorAlert(description: RegistrationError.ageNotUnderFive.localizedDescription)
+                        }
+                    }
+                    
+                } else if employeeButton.isSelected {
+                    if firstNameTF.text == "" || lastNameTF.text == "" || streetAddressTF.text == "" || cityTF.text == "" || stateTF.text == "" ||  ssnTF.text == "" || dateOfBirthTF.text == "" {
+                        errorAlert(description: RegistrationError.informationMissing.localizedDescription)
+                    } else if zipCodeTF.text?.count != 6 {
+                        errorAlert(description: RegistrationError.zipcodeLength.localizedDescription)
+                    } else if ssnTF.text?.count != 9 {
+                        errorAlert(description: RegistrationError.ssnLettersOrLenght.localizedDescription)
+                    } else {
+                        errorAlert(description: RegistrationError.generalError.localizedDescription)
+                    }
+                    
+                } else if contractButton.isSelected {
+                    if firstNameTF.text == "" || lastNameTF.text == "" || streetAddressTF.text == "" || cityTF.text == "" || stateTF.text == "" || ssnTF.text == "" || dateOfBirthTF.text == "" {
+                        errorAlert(description: RegistrationError.informationMissing.localizedDescription)
+                    } else if zipCodeTF.text?.count != 6 {
+                        errorAlert(description: RegistrationError.zipcodeLength.localizedDescription)
+                    } else if ssnTF.text?.count != 9 {
+                        errorAlert(description: RegistrationError.ssnLettersOrLenght.localizedDescription)
+                    } else {
+                        errorAlert(description: RegistrationError.generalError.localizedDescription)
+                    }
+                    
+                } else if vendorButton.isSelected {
+                    if firstNameTF.text == "" || lastNameTF.text == "" || dateOfVisitTF.text == "" || dateOfBirthTF.text == "" {
+                        errorAlert(description: RegistrationError.informationMissing.localizedDescription)
+                    } else if dateOfBirthTF.text != "" {
+                        errorAlert(description: RegistrationError.dateConversionFailed.localizedDescription)
+                    } else {
+                        errorAlert(description: RegistrationError.generalError.localizedDescription)
+                    }
+                    
+                } else {
+                    errorAlert(description: RegistrationError.generalError.localizedDescription)
+                }
             }
         }
     }
     
-//    func registrationAlert(description: String) {
-//
-//        let alert = UIAlertController(title: "Registration Error", message: description, preferredStyle: .alert)
-//        let confirm = UIAlertAction(title: "Confirm", style: .default) {
-//            (action) in alert.dismiss(animated: true, completion: nil)
-//        }
-//
-//        alert.addAction(confirm)
-//        present(alert, animated: true, completion: nil)
-//    }
     
     // This provides a mockup visitor when Populate Button is pressed
     @IBAction func populateFields(_ sender: UIButton) {
@@ -386,7 +463,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         employeeStack.isHidden = true
         vendorStack.isHidden = true
         projectStack.isHidden = true
-
+        
     }
     
     func showEmployeeMenu() {
@@ -397,7 +474,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         rideServicesButton.isHidden = false
         maintenanceButton.isHidden = false
     }
-
+    
     func showVendorMenu() {
         vendorView.isHidden = false
         vendorStack.isHidden = false
@@ -415,7 +492,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         project1003Button.isHidden = false
         project2001Button.isHidden = false
         project2002Button.isHidden = false
-   }
+    }
     
     
     func hideSubMenuStacks() {
@@ -445,7 +522,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         ssnTF.isHidden = true
         dateOfVisit.isHidden = true
         dateOfVisitTF.isHidden = true
- 
+        
     }
     
     // These show parts of the form needed for entrant
@@ -576,11 +653,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Sub Menu Selection
     @IBAction func subMenuButtonManager(_ sender: UIButton) {
-         resetInputFields()
-         resetSubMenuHighlight() // Thse set the normal border color state
-         sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor // This is selected border color state
+        resetInputFields()
+        resetSubMenuHighlight() // Thse set the normal border color state
+        sender.borderColor = UIColor.BorderColor.buttonSelectedBorderColor // This is selected border color state
         
-         hideAllLabelsAndTextFields()
+        hideAllLabelsAndTextFields()
         
         switch sender {
         case classicButton:
@@ -700,7 +777,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }

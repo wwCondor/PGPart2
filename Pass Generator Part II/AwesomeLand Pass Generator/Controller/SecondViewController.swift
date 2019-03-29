@@ -18,7 +18,6 @@ class SecondViewController: UIViewController {
     // Button takes you back to first screen
     // Should reset everything
     @IBAction func newEntrant(_ sender: Any) {
-        // entrantSelected = nil
         dismiss(animated: true, completion: nil)
     }
     
@@ -100,29 +99,7 @@ class SecondViewController: UIViewController {
         rideControlAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
         maintenanceAccessTest.borderColor = UIColor.SwipeResultColor.normalColor
     }
-    
-    func swipeAlert(description: String) {
         
-        let alert = UIAlertController(title: "You shall not Pass", message: description, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "Confirm", style: .default) {
-            (action) in alert.dismiss(animated: true, completion: nil)
-        }
-        
-        alert.addAction(confirm)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func birthdayAlert(description: String) {
-        
-        let alert = UIAlertController(title: "Happy Birthday!", message: description, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "Confirm", style: .default) {
-            (action) in alert.dismiss(animated: true, completion: nil)
-        }
-        
-        alert.addAction(confirm)
-        present(alert, animated: true, completion: nil)
-    }
-    
     // Permission for area/privilege is checked here
     // If access granted "testFlag" turns green
     // If access denied "testFlag" turns red
@@ -138,7 +115,7 @@ class SecondViewController: UIViewController {
         // If timer is != 0 pass has been used recently
         if TimerForGates.seconds != 0 {
             print("This pass has been used recently")
-            swipeAlert(description: "This pass has been used recently, please wait 5 second before using it again")
+            swipeAlert(description: "This pass has been used recently, please wait 5 seconds before using it again")
         }
         
         // This starts timer when pass is swiped
@@ -152,6 +129,8 @@ class SecondViewController: UIViewController {
 
         switch sender {
             
+        // These are area/privilege tests
+        // Pass is swiped and result is shown
         case rideAccesTest:
             if PrivilegeSwipe.swipe(pass: passForVisitor, toCheck: .rideAccess) == true {
                 testSuccess()
@@ -275,9 +254,7 @@ class SecondViewController: UIViewController {
         // Depending on kind of pass, extra info will be displayed
         switch passForVisitor {
         case is ClassicGuestPass:
-//            guard let pass = passForVisitor as? ClassicGuestPass else { return }
             guard let visitor = passForVisitor.entrant as? Guest else { return }
-//            guard let entrant = visitor as? ContractEmployee else { return }
             typeOfPassLabel.text = TypeOfPass.classic.rawValue
             dobLabel.text = visitor.birthday
             

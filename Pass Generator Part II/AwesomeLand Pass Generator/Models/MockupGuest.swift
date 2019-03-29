@@ -18,20 +18,20 @@ struct MockupGuest {
     static let mockupFreeChild = Guest(type: .freeChild, birthday: "15-09-2018")
     static let mockupVip = Guest(type: .vip, birthday: "15-09-1984")
     static let mockupSenior = SeniorGuest(firstName: "Oldi", lastName: "Wan Kenobi", type: .senior, birthday: "15-09-1884")
-    static let mockupSeason = SeasonGuest(firstName: "Summer", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", type: .season, birthday: "15-09-1984")
+    static let mockupSeason = SeasonGuest(firstName: "Summer", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", type: .season, birthday: "15-09-1984")
     
     // Employees
-    static let mockupFoodService = Employee(type: .foodServices, firstName: "Hotte", lastName: "Doggerson", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", birthday: "15-09-1984")
-    static let mockupRideService = Employee(type: .rideServices, firstName: "Rollo", lastName: "Coast", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", birthday: "15-09-1984")
-    static let mockupMaintenance = Employee(type: .maintenance, firstName: "Bob", lastName: "Builder", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", birthday: "15-09-1984")
-    static let mockupManager = Employee(type: .manager, firstName: "Mr", lastName: "Manager", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", birthday: "15-09-1984")
+    static let mockupFoodService = Employee(type: .foodServices, firstName: "Hotte", lastName: "Doggerson", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", birthday: "15-09-1984")
+    static let mockupRideService = Employee(type: .rideServices, firstName: "Rollo", lastName: "Coast", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", birthday: "15-09-1984")
+    static let mockupMaintenance = Employee(type: .maintenance, firstName: "Bob", lastName: "Builder", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", birthday: "15-09-1984")
+    static let mockupManager = Employee(type: .manager, firstName: "Mr", lastName: "Manager", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", birthday: "15-09-1984")
     
     // Contract Employees
-    static let mockupContractP1001 = ContractEmployee(type: .contract, firstName: "Jill", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", projectNumber: .p1001, birthday: "15-09-1984")
-    static let mockupContractP1002 = ContractEmployee(type: .contract, firstName: "Jane", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", projectNumber: .p1002, birthday: "15-09-1984")
-    static let mockupContractP1003 = ContractEmployee(type: .contract, firstName: "Jimmy", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", projectNumber: .p1003, birthday: "15-09-1984")
-    static let mockupContractP2001 = ContractEmployee(type: .contract, firstName: "Jenny", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678",projectNumber: .p2001, birthday: "15-09-1984")
-    static let mockupContractP2002 = ContractEmployee(type: .contract, firstName: "James", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "12345", ssn: "12345678", projectNumber: .p2002, birthday: "15-09-1984")
+    static let mockupContractP1001 = ContractEmployee(type: .contract, firstName: "Jill", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", projectNumber: .p1001, birthday: "15-09-1984")
+    static let mockupContractP1002 = ContractEmployee(type: .contract, firstName: "Jane", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", projectNumber: .p1002, birthday: "15-09-1984")
+    static let mockupContractP1003 = ContractEmployee(type: .contract, firstName: "Jimmy", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", projectNumber: .p1003, birthday: "15-09-1984")
+    static let mockupContractP2001 = ContractEmployee(type: .contract, firstName: "Jenny", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789",projectNumber: .p2001, birthday: "15-09-1984")
+    static let mockupContractP2002 = ContractEmployee(type: .contract, firstName: "James", lastName: "Person", streetAddress: "Street", city: "City", state: "State", zipCode: "1234AA", ssn: "123456789", projectNumber: .p2002, birthday: "15-09-1984")
     
     // Vendors
     static let mockupOrkinVendor = Vendor(company: .orkin, firstName: "Green", lastName: "Orkman", visitingDate: "20-06-2019", birthday: "15-09-1884")
