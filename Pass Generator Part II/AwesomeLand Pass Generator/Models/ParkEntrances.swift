@@ -149,7 +149,7 @@ extension Entrant {
             throw RegistrationError.missingLastName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
-        } else if entrant.birthday?.count != 8 {
+        } else if entrant.birthday?.count != 10 {
             // do someething that checks if input provided is date
             throw RegistrationError.dateConversionFailed
         } else if entrant.streetAddress == "" {
@@ -218,7 +218,7 @@ extension Entrant {
             throw RegistrationError.missingLastName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
-        } else if entrant.birthday?.count != 8 {
+        } else if entrant.birthday?.count != 10 {
             // do someething that checks if input provided is date
             throw RegistrationError.dateConversionFailed
         } else if entrant.streetAddress == "" {
@@ -287,7 +287,7 @@ extension Entrant {
             throw RegistrationError.missingLastName
         } else if entrant.birthday == "" {
             throw RegistrationError.missingBirthday
-        } else if entrant.birthday?.count != 8 {
+        } else if entrant.birthday?.count != 10 {
             // do someething that checks if input provided is date
             throw RegistrationError.dateConversionFailed
         } else if entrant.streetAddress == "" {
